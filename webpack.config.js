@@ -1,16 +1,8 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MediaQueryPlugin = require('media-query-plugin');
-// const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-// const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { InjectManifest } = require('workbox-webpack-plugin');
 const path = require('path');
-// const WebpackShellPlugin = require('webpack-shell-plugin');
-// const exec = require('child_process').exec;
-
-const OfflineRequestsWebpackConfig = require('./webpack.config.offline-requests');
-const CartAbandonNotificationWebpackConfig = require('./webpack.config.cart-abandon-notification');
-const PushExamplesWebpackConfig = require('./webpack.config.push-examples');
 
 const plugins = [
   new HtmlWebpackPlugin({
@@ -50,9 +42,6 @@ const plugins = [
 ];
 
 module.exports = [
-  OfflineRequestsWebpackConfig,
-  CartAbandonNotificationWebpackConfig,
-  PushExamplesWebpackConfig,
   {
     // Tell Webpack which file kicks off our app.
     entry: {
@@ -128,21 +117,3 @@ module.exports = [
     plugins: [...plugins]
   }
 ];
-
-
-
-//     filename: ({ chunk }) => {
-//       switch (chunk.name) {
-//         case 'offlineRequests':
-//           return 'offline-requests/[name].js'
-//         default: 
-//         case 'cartAbandonNotification':
-//           return 'cart-abandon-notification/[name].js'
-//         default: 
-//         case 'pushExamples':
-//           return 'push-examples/[name].js'
-//         default: 
-//           return '[name].js';
-//       }
-//     },
-//     path: path.resolve(__dirname, 'build')

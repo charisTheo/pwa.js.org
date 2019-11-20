@@ -6,7 +6,7 @@
     "charisTheo <dev@charistheo.io>"
   ],
   "license": "ISC",
-  "homepage": "https://github.com/charisTheo/pwa-recipes",
+  "homepage": "https://github.com/charisTheo/pwa.js.org",
   "ignore": [
     "**/.*",
     "node_modules",

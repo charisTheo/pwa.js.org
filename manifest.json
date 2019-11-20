@@ -1,6 +1,6 @@
 {
-  "short_name": "PWAr",
-  "name": "PWA Recipes",
+  "short_name": "PWA.js.org",
+  "name": "PWA.js.org",
   "icons": [
     {
       "src": "./favicon/favicon.ico",

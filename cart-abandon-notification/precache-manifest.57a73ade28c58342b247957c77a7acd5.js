@@ -1,7 +1,7 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "4fc3975f47968842527d",
-    "url": "bundle.js"
+    "revision": "95486a8d3f8d8cd4063d",
+    "url": "cartAbandonNotification.js"
   },
   {
     "revision": "51e256e1ad295a9b965f79bed334c3fe",
@@ -44,10 +44,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "img/chrome-web-icon-96.png"
   },
   {
-    "revision": "2fa446e9ef97056dae09c2b2f718b6b5",
-    "url": "img/floating-cogs.svg"
-  },
-  {
     "revision": "d9762193c259d4c0600fa8968fbfde80",
     "url": "img/money-with-wings.png"
   },
@@ -64,7 +60,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "img/placeholder-image.png"
   },
   {
-    "revision": "57027210eb72c9958f2641b585219460",
+    "revision": "275ce4da54fd66f49c8448b8ce8ff213",
     "url": "img/products/headphones.jpg"
   },
   {
@@ -72,7 +68,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "img/products/headphones.webp"
   },
   {
-    "revision": "c4270d80517c1e134577953ff9998a85",
+    "revision": "b836a0fb9910a14603841bdb74473962",
     "url": "img/products/ps4.jpg"
   },
   {
@@ -80,7 +76,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "img/products/ps4.webp"
   },
   {
-    "revision": "345bebf82da657d4b7d8b5e9707b57bf",
+    "revision": "ec7acaaefd0037d5bc125be230730fa0",
     "url": "img/products/smart-watch.jpg"
   },
   {
@@ -96,15 +92,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "img/speech-notification-badge-inverted-48.png"
   },
   {
-    "revision": "0f7a789d7fbb85e13de14fc24115e901",
+    "revision": "92f1a0781531fac679752fa6d93c95c0",
     "url": "index.html"
   },
   {
     "revision": "2cab2f01550ace81a3628dd67fffdcce",
     "url": "manifest.json"
-  },
-  {
-    "revision": "970ccfef4f583a32e787f8e1d0d4e0ec",
-    "url": "service-worker.js"
   }
 ]);

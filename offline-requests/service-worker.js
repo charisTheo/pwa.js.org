@@ -1,7 +1,8 @@
-importScripts("precache-manifest.f0f0e01a89e53089e64f39eb766f0ce9.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("precache-manifest.502caef926812e7289343b6b3ed855e2.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 // https://developers.google.com/web/tools/workbox/guides/configure-workbox
-const placeholderURL = '/img/placeholder-image.png'; // precaching this in __precacheManifest file
+const PLACEHOLDER_IMAGE_URL = '/img/placeholder-image.png';
+const PAGE_ICON_URL = '/push-examples/favicon/android-chrome-192x192.png';
 const API_URL = 'https://ecommerce-pwa.herokuapp.com';
 var db;
 
@@ -11,7 +12,7 @@ if (workbox) {
   console.log(`Boo! Workbox didn't load 😬`);
 }
 
-workbox.precaching.precacheAndRoute(self.__precacheManifest || []);
+workbox.precaching.precacheAndRoute(self.__precacheManifest || [PLACEHOLDER_IMAGE_URL, PAGE_ICON_URL]);
 
 addEventListener('activate', event => {
   event.waitUntil(clients.claim());
@@ -24,12 +25,7 @@ addEventListener('message', event => {
 });
 
 workbox.routing.registerRoute(
-  /(https:\/\/fonts.googleapis.com)/,
-  new workbox.strategies.StaleWhileRevalidate()
-);
-
-workbox.routing.registerRoute(
-  /(https:\/\/fonts.gstatic.com)/,
+  /(https:\/\/fonts\.(googleapis|gstatic)\.com)/,
   new workbox.strategies.StaleWhileRevalidate()
 );
 
@@ -39,31 +35,35 @@ workbox.routing.registerRoute(
 );
 
 workbox.routing.registerRoute(
-  /\.(?:js|css)$/,
-  new workbox.strategies.StaleWhileRevalidate()
-);
-
-workbox.routing.registerRoute(
   /\.(?:webp|png|jpg|jpeg|svg)$/,
   async ({url, event, params}) => {
     const staleWhileRevalidate = new workbox.strategies.StaleWhileRevalidate();
-    const response = await fetch(url, { method: 'GET' }) || await caches.match(event.request);
-    
-    if (response && response.status === 404 && url.href.match('\/products\/')) {
-      console.warn(`\nServiceWorker: Image [${url.href}] was not found either in network or in cache! Responding with placeholder image instead...`);
-      // * respond with placeholder image
-      return await fetch(placeholderURL, { method: 'GET' });
 
-    } else {
-      return await staleWhileRevalidate.handle({event});
-      
+    try {
+      const response = await caches.match(event.request) || await fetch(url, { method: 'GET' });
+      if (!response || response.status === 404 && url.href.match('\/products\/')) {
+        throw new Error(response.status);
+      } else {
+        return await staleWhileRevalidate.handle({event});
+      }
+
+    } catch (error) {
+      console.warn(`\nServiceWorker: Image [${url.href}] was not found either in the network or the cache. Responding with placeholder image instead.\n`);
+      // * get placeholder image from cache || get placeholder image from network
+      return await caches.match(PLACEHOLDER_IMAGE_URL) || await fetch(PLACEHOLDER_IMAGE_URL, { method: 'GET' });
+
     }
   }
 );
 
 workbox.routing.registerRoute(
-  new RegExp('/.*'), 
-  new workbox.strategies.NetworkFirst(), 
+  /(index\.html|\/)/g,
+  new workbox.strategies.CacheFirst(),
+  'GET'
+);
+workbox.routing.registerRoute(
+  /\.(?:css|js)$/,  
+  new workbox.strategies.CacheFirst(),
   'GET'
 );
 
@@ -145,7 +145,7 @@ self.addEventListener('notificationclick', function(event) {
       const { items } = data;
 
       event.waitUntil(
-        clients.openWindow(`/?checkout=${true}&items=${encodeURIComponent(JSON.stringify(items))}`)
+        clients.openWindow(`/offline-requests/?checkout=${true}&items=${encodeURIComponent(JSON.stringify(items))}`)
       );
     }
 
@@ -155,11 +155,11 @@ self.addEventListener('notificationclick', function(event) {
   switch (event.action) {
     case 'checkout':
       const { items } = data;
-      event.waitUntil(clients.openWindow(`/?checkout=${true}&items=${encodeURIComponent(JSON.stringify(items))}`));
+      event.waitUntil(clients.openWindow(`/offline-requests/?checkout=${true}&items=${encodeURIComponent(JSON.stringify(items))}`));
     break;
     
     case 'clear':
-      event.waitUntil(clients.openWindow(`/?clear-shopping-cart=${true}`));
+      event.waitUntil(clients.openWindow(`/offline-requests/?clear-shopping-cart=${true}`));
     break;
 
     default:

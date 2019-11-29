@@ -1,8 +1,5 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "url": "f0dd6d98a23d88ccbd54237ef96f2776.svg"
-  },
-  {
     "revision": "c7d1d544f23717242046802b50ad58e8",
     "url": "favicon.ico"
   },
@@ -39,10 +36,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "img/cool.png"
   },
   {
-    "revision": "f0dd6d98a23d88ccbd54237ef96f2776",
-    "url": "img/floating-cogs.svg"
-  },
-  {
     "revision": "36775ebdb88cc0ed93cd40e63e244e78",
     "url": "img/funny-cat.jpg"
   },
@@ -59,7 +52,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "img/speech-notification-badge-inverted-48.png"
   },
   {
-    "revision": "b5a301470014396bfb82f69fa0d3ed00",
+    "revision": "d9672bfd3a1f52c1aeb02cc818e7e3b4",
     "url": "index.html"
   },
   {
@@ -67,11 +60,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "manifest.json"
   },
   {
-    "revision": "d31401726224e65664c0",
+    "revision": "2d646adfdcfb40930766",
     "url": "pushExamples.js"
-  },
-  {
-    "revision": "db6facc4a348c8778a72ff7bc7ce5046",
-    "url": "service-worker.js"
   }
 ]);

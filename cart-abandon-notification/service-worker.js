@@ -1,7 +1,9 @@
-importScripts("precache-manifest.ee251098ad9bec8381f2b4da92643bac.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("precache-manifest.57a73ade28c58342b247957c77a7acd5.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 // https://developers.google.com/web/tools/workbox/guides/configure-workbox
-const placeholderURL = '/img/placeholder-image.png'; // precaching this in __precacheManifest file
+// precaching these images in the __precacheManifest file
+const PLACEHOLDER_IMAGE_URL = '/img/placeholder-image.png';
+const PAGE_ICON_URL = '/cart-abandon-notification/favicon/android-chrome-192x192.png';
 
 if (workbox) {
   console.log(`Yay! Workbox is loaded 🎉`);
@@ -9,7 +11,7 @@ if (workbox) {
   console.log(`Boo! Workbox didn't load 😬`);
 }
 
-workbox.precaching.precacheAndRoute(self.__precacheManifest || [placeholderURL]);
+workbox.precaching.precacheAndRoute(self.__precacheManifest || [PLACEHOLDER_IMAGE_URL, PAGE_ICON_URL]);
 
 addEventListener('activate', event => {
   event.waitUntil(clients.claim());
@@ -27,43 +29,58 @@ workbox.routing.registerRoute(
 );
 
 workbox.routing.registerRoute(
-  /(https:\/\/fonts.googleapis.com)/,
+  /(https:\/\/fonts\.(googleapis|gstatic)\.com)/,
   new workbox.strategies.StaleWhileRevalidate()
 );
 
 workbox.routing.registerRoute(
-  /(https:\/\/fonts.gstatic.com)/,
-  new workbox.strategies.StaleWhileRevalidate()
+  /(index\.html|\/)/g,
+  new workbox.strategies.StaleWhileRevalidate(),
+  'GET'
 );
 
 workbox.routing.registerRoute(
-    /\.(?:js|css)$/,
-    new workbox.strategies.StaleWhileRevalidate()
+  /\.(?:css|js)$/,  
+  new workbox.strategies.CacheFirst(),
+  'GET'
 );
-  
+
 workbox.routing.registerRoute(
   /\.(?:webp|png|jpg|jpeg|svg)$/,
   async ({url, event, params}) => {
     const staleWhileRevalidate = new workbox.strategies.StaleWhileRevalidate();
-    const response = await fetch(url, { method: 'GET' }) || await caches.match(event.request);
     
-    if (response && response.status === 404 && url.href.match('\/products\/')) {
-      console.warn(`\nServiceWorker: Image [${url.href}] was not found either in network or in cache! Responding with placeholder image instead...`);
-      // * respond with placeholder image
-      return await fetch(placeholderURL, { method: 'GET' });
+    try {
+      const response = await caches.match(event.request) || await fetch(url, { method: 'GET' });
+      if (response && response.status === 404 && url.href.match('\/products\/')) {
+        throw new Error(response.status);
+      } else {
+        return await staleWhileRevalidate.handle({event});
+      }
 
-    } else {
-      return await staleWhileRevalidate.handle({event});
-      
+    } catch (error) {
+      console.warn(`\nServiceWorker: Image [${url.href}] was not found either in the network or the cache. Responding with placeholder image instead.\n`);
+      // * get placeholder image from cache || get placeholder image from network
+      return await caches.match(PLACEHOLDER_IMAGE_URL) || await fetch(PLACEHOLDER_IMAGE_URL, { method: 'GET' });
+
     }
   }
 );
 
-workbox.routing.registerRoute(
-  new RegExp('/.*'), 
-  new workbox.strategies.NetworkFirst(), 
-  'GET'
-);
+// ! DEBUG ONLY
+// addEventListener('fetch', event => {
+//   console.log(event.request.url);
+//   if (event.request.url.match(/css/g)) {
+//     console.log("TCL: event.request", event.request);
+//     // console.log("TCL: event.request.url", event.request.url)
+//   }
+// });
+// ! DEBUG ONLY
+// self.addEventListener('install', (event) => {
+//   const urls = ['bundle.js'];
+//   const cacheName = workbox.core.cacheNames.runtime;
+//   event.waitUntil(caches.open(cacheName).then((cache) => cache.addAll(urls)));
+// });
 
 self.addEventListener('push', function(event) {
   let options = {};
@@ -103,11 +120,11 @@ self.addEventListener('notificationclick', function(event) {
   switch (event.action) {
     case 'checkout':
       const { items } = data;
-      event.waitUntil(clients.openWindow(`/?checkout=${true}&items=${encodeURIComponent(JSON.stringify(items))}`));
+      event.waitUntil(clients.openWindow(`/cart-abandon-notification/?checkout=${true}&items=${encodeURIComponent(JSON.stringify(items))}`));
     break;
     
     case 'clear':
-      event.waitUntil(clients.openWindow(`/?clear-shopping-cart=${true}`));
+      event.waitUntil(clients.openWindow(`/cart-abandon-notification/?clear-shopping-cart=${true}`));
     break;
 
     default:

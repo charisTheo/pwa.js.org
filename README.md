@@ -2,11 +2,12 @@
   <img width="300" src="https://github.com/charisTheo/pwa-recipes/blob/master/img/pwa-logo.png?raw=true" alt="PWA unofficial logo"/>
 </p>
 
-# PWA Recipes 🥘 for every chef developer 👨‍🍳👩‍🍳
-## [Demo](https://pwa.recipes/)
+# 4 the ❤️ of PWA! 🙌
 
-## [Offline Requests 📴](https://github.com/charisTheo/pwa-recipes/blob/master/src/pages/offline-requests) - [Demo](https://www.pwa.recipes/offline-requests/)
+## Example PWA use-cases 👨‍🍳👩‍🍳 [Demo](https://pwa.recipes/)
 
-## [Cart Abandon Notification 🛒](https://github.com/charisTheo/pwa-recipes/blob/master/src/pages/cart-abandon-notification) - [Demo](https://www.pwa.recipes/cart-abandon-notification/)
+### [Offline Requests 📴](https://github.com/charisTheo/pwa-recipes/blob/master/src/pages/offline-requests) - [Demo](https://www.pwa.recipes/offline-requests/)
 
-## [Push Example Notifications 🔔](https://github.com/charisTheo/pwa-recipes/blob/master/src/pages/push-examples) - [Demo](https://www.pwa.recipes/push-examples/)
+### [Cart Abandon Notification 🛒](https://github.com/charisTheo/pwa-recipes/blob/master/src/pages/cart-abandon-notification) - [Demo](https://www.pwa.recipes/cart-abandon-notification/)
+
+### [Push Example Notifications 🔔](https://github.com/charisTheo/pwa-recipes/blob/master/src/pages/push-examples) - [Demo](https://www.pwa.recipes/push-examples/)

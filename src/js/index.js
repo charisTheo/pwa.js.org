@@ -3,6 +3,8 @@ if (!global._babelPolyfill) {
 }
 
 import './../css/main.css';
+import './../global/styles.css';
+import './../global/iosInstallBanner.css';
 
 import { Workbox } from 'workbox-window';
 
@@ -15,8 +17,11 @@ import '@polymer/iron-icons/iron-icons';
 import '@polymer/iron-icon/iron-icon';
 import '@polymer/paper-tabs/paper-tabs';
 import '@polymer/paper-tabs/paper-tab';
+import '@polymer/paper-item/paper-item';
+import '@polymer/paper-item/paper-item-body';
+import '@polymer/paper-item/paper-icon-item';
 
-import { showSnackBar } from "./snackBar";
+import { showSnackBar } from "../global/snackBar";
 import { sharePage } from "./webShare";
 import { 
     isIos,
@@ -25,13 +30,12 @@ import {
     setCookie,
     removeElements,
     findUrlInCache
-} from "./util";
+} from "../global/util";
 
 const SERVICE_WORKER_SCOPE = '/';
-const pageCardLinks = document.querySelectorAll('.page-card-link');
-const installPwaCard = document.querySelector('.install-pwa-card');
-const installPwaButtons = document.querySelectorAll('.install-pwa-button');
-const installPwaDismissButton = document.querySelector('.install-pwa-dismiss-button');
+let installPwaCard = document.querySelector('.install-pwa-card');
+let installPwaButtons = document.querySelectorAll('.install-pwa-button');
+let installPwaDismissButton = document.querySelector('.install-pwa-dismiss-button');
 const pageShareButton = document.querySelector('.page-share-button');
 const iosInstallBanner = document.querySelector('#ios-install-banner');
 const iosInstallBannerDismissButton = document.querySelector('#ios-install-banner-dismiss-button');
@@ -41,8 +45,11 @@ window.addEventListener('load', async () => {
     applyMediaQueriesOnDeviceWidth();
     registerServiceWorker();
     attachEventListeners();
+    // * load the html based on the initially selected tab
+    import(/* webpackChunkName: "tabs" */ './tabs').then(tabs => tabs.renderHtmlForTabSelected(tabbedNavigation.selectedItem.dataset.navigateTo));
+
     if (!navigator.onLine) {
-        handleOfflineEvent();    
+        handleOfflineEvent();
     }
 });
 
@@ -64,14 +71,25 @@ const unmarkOfflineAvailableContent = () => {
     pageLinks.forEach(pageLink => pageLink.classList.remove('unavailable-offline'));
 }
 
-const markOfflineAvailableContent = () => {
+export const markOfflineAvailableContent = () => {
+    // ! if only in the apps tab
+    // TODO make this work cross tab 
+    const pageCardLinks = document.querySelectorAll('.page-card-link');
+    if (!pageCardLinks.length && tabbedNavigation.selectedItem.dataset.navigateTo === 'apps') {
+        // ! is in apps tab but the content has not been loaded yet
+        // * schedule for 200ms later
+        setTimeout(markOfflineAvailableContent, 200);
+        return;
+    }
+
     const pagesArr = Array.from(pageCardLinks);
     pagesArr.map(async page => {
         const url = page.getAttribute('href');
-        console.log("showOfflineAvailablePages -> url", url);
-        const cachedItems = await findUrlInCache(url);
-        console.log("showOfflineAvailablePages -> cachedItems", cachedItems);
-        if (cachedItems.length) {
+        // console.log("showOfflineAvailablePages -> url", url);
+        const pageIsCached = await findUrlInCache(url);
+        // console.log("showOfflineAvailablePages -> pageIsCached", pageIsCached);
+
+        if (pageIsCached) {
             // * show available offline icon
             page.querySelector('.available-offline-icon').hidden = false;
         } else {
@@ -106,7 +124,7 @@ const registerServiceWorker = () => {
     }
 }
 
-const installPwa = async () => {
+export const installPwa = async () => {
     // hide install prompt
     dismissInstallPwaButtons();
     deferredPromptEvent.prompt();
@@ -117,7 +135,7 @@ const installPwa = async () => {
     });
 }
 
-const dismissInstallPwaButtons = () => {
+export const dismissInstallPwaButtons = () => {
     if (isIos) {
         removeElements(iosInstallBanner);
         const expiryDate = new Date();
@@ -125,6 +143,8 @@ const dismissInstallPwaButtons = () => {
         setCookie('IOS_INSTALL_BANNER_DISMISSED', `true;expires=${expiryDate.toGMTString()}`);
 
     } else {
+        // TODO
+        installPwaCard = document.querySelector('.install-pwa-card');
         removeElements(installPwaCard);
 
     }
@@ -140,16 +160,16 @@ const applyMediaQueriesOnDeviceWidth = () => {
     }
 }
 
-const navigationTabSelected = event => {
-    const navigateTo = event.detail.item.getAttribute('data-navigate-to');
-    window.history.pushState({}, document.title, navigateTo);
-}
-
 const attachEventListeners = () => {
     // ? clicks
-    installPwaButtons.forEach(button => button.addEventListener('click', installPwa))
-    installPwaDismissButton.addEventListener('click', dismissInstallPwaButtons);
-    iosInstallBannerDismissButton.addEventListener('click', dismissInstallPwaButtons)
+    try {
+        // ? apps tab specific event listeners
+        installPwaButtons.forEach(button => button.addEventListener('click', installPwa));
+        installPwaDismissButton.addEventListener('click', dismissInstallPwaButtons);
+        iosInstallBannerDismissButton.addEventListener('click', dismissInstallPwaButtons);
+    } catch (error) {
+
+    }
     pageShareButton.addEventListener('click', sharePage);
 
     // ? Window
@@ -161,7 +181,9 @@ const attachEventListeners = () => {
     };
 
     // ? Navigation
-    tabbedNavigation.addEventListener('iron-select', navigationTabSelected);
+    tabbedNavigation.addEventListener('iron-select', event => {
+        import(/* webpackChunkName: "tabs" */ './tabs').then(tabs => tabs.navigationTabSelected(event));
+    });
 }
 
 let deferredPromptEvent;
@@ -174,7 +196,13 @@ window.addEventListener('beforeinstallprompt', function(e) {
         // * app is not launched as a PWA
         // * show install prompt
         if (!isIos) {
-            installPwaCard.hidden = false;
+            // TODO
+            setTimeout(() => {
+                if (!installPwaCard) {
+                    installPwaCard = document.querySelector('.install-pwa-card');
+                }
+                installPwaCard.hidden = false
+            }, 1000);
         } else {
             if (getCookie('IOS_INSTALL_BANNER_DISMISSED') !== 'true') {
                 iosInstallBanner.hidden = false;

@@ -1,13 +1,21 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MediaQueryPlugin = require('media-query-plugin');
+// const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+// const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { InjectManifest } = require('workbox-webpack-plugin');
 const path = require('path');
+// const WebpackShellPlugin = require('webpack-shell-plugin');
+// const exec = require('child_process').exec;
+
+const OfflineRequestsWebpackConfig = require('./webpack.config.offline-requests');
+const CartAbandonNotificationWebpackConfig = require('./webpack.config.cart-abandon-notification');
+const PushExamplesWebpackConfig = require('./webpack.config.push-examples');
 
 const plugins = [
   new HtmlWebpackPlugin({
     filename: 'index.html',
-    favicon: 'favicon/favicon.ico',
+    favicon: 'src/favicon/favicon.ico',
     template: path.resolve(__dirname, 'src/index.ejs'),
     chunks: ['home'],
     inlineSource: 'src\/css\/.css$'
@@ -18,20 +26,22 @@ const plugins = [
       to: 'bower_components/webcomponentsjs/[name].[ext]'
     },
     {
-      from: path.resolve(__dirname, 'img'),
+      from: path.resolve(__dirname, 'src/img'),
       to: path.resolve(__dirname, 'build/img'),
     },
     {
-      from: path.resolve(__dirname, 'favicon'),
+      from: path.resolve(__dirname, 'src/favicon'),
       to: path.resolve(__dirname, 'build/favicon'),
     },
-    'service-worker.js',
-    'manifest.json',
-    'CNAME'
+    'src/offline.html',
+    'src/manifest.json',
+    'src/CNAME'
   ]),
   new InjectManifest({
-    swSrc: 'service-worker.js',
-    exclude: ['service-worker.js', 'CNAME']
+    swSrc: 'src/service-worker.js',
+    exclude: [/(service-worker|index)\.js/, /\.DS_Store$/, /\/unoptimised\/.+\.jpg/, /CNAME/, /\/pages\//],
+    chunks: ['home'],
+    include: ['\/.js$']
   }),
   new MediaQueryPlugin({
     include: true,
@@ -42,17 +52,20 @@ const plugins = [
 ];
 
 module.exports = [
+  OfflineRequestsWebpackConfig,
+  CartAbandonNotificationWebpackConfig,
+  PushExamplesWebpackConfig,
   {
+    mode: 'none',
     // Tell Webpack which file kicks off our app.
     entry: {
       home: path.resolve(__dirname, 'src/js/index.js'),
-      // offlineRequests: path.resolve(__dirname, 'src/offline-requests/js/index.js'),
-      // cartAbandonNotification: path.resolve(__dirname, 'src/cart-abandon-notification/js/index.js'),
-      // pushExamples: path.resolve(__dirname, 'src/push-examples/js/index.js'),
+      // tabs: path.resolve(__dirname, 'src/js/tabs.js'),
     },
     // Tell Weback to output our bundle.js
     output: {
       filename: '[name].js',
+      chunkFilename: '[name].js',
       path: path.resolve(__dirname, 'build')
     },
     // Tell Webpack which directories to look in to resolve import statements.
@@ -79,7 +92,8 @@ module.exports = [
           // babel-loader. This let's us transpile JS in our `<script>` elements.
           use: [
             { loader: 'babel-loader' },
-            { loader: 'polymer-webpack-loader' }
+            { loader: 'polymer-webpack-loader' },
+            { loader: 'raw-loader' }
           ]
         },
         {
@@ -117,3 +131,21 @@ module.exports = [
     plugins: [...plugins]
   }
 ];
+
+
+
+//     filename: ({ chunk }) => {
+//       switch (chunk.name) {
+//         case 'offlineRequests':
+//           return 'offline-requests/[name].js'
+//         default: 
+//         case 'cartAbandonNotification':
+//           return 'cart-abandon-notification/[name].js'
+//         default: 
+//         case 'pushExamples':
+//           return 'push-examples/[name].js'
+//         default: 
+//           return '[name].js';
+//       }
+//     },
+//     path: path.resolve(__dirname, 'build')

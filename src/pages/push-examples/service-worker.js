@@ -1,5 +1,6 @@
 // https://developers.google.com/web/tools/workbox/guides/configure-workbox
 const PAGE_ICON_URL = '/push-examples/favicon/android-chrome-192x192.png';
+const OFFLINE_PAGE_URL = '/offline.html';
 
 if (workbox) {
   console.log(`Yay! Workbox is loaded 🎉`);
@@ -12,12 +13,44 @@ addEventListener('activate', event => {
   skipWaiting();
 });
 
+//  TODO
+// addEventListener('message', event => {
+//   if (event.data && event.data.type === 'NEW_VERSION') {
+//     skipWaiting();
+//   }
+// });
+
+addEventListener('fetch', async event => {
+  if (event.request.mode === 'navigate') {
+    event.respondWith((async () => {
+      const staleWhileRevalidate = new workbox.strategies.StaleWhileRevalidate();
+      const url = event.request.url;
+      
+      try {
+        // check if the event.request.url exists in the cache or in the network
+        const response = await caches.match(event.request) || await fetch(event.request);
+        if (!response || response.status === 404) {
+          throw new Error(response.status);
+        } else {
+          return await staleWhileRevalidate.handle({event});
+        }
+  
+      } catch (error) {
+        // if not found in any of the two, respond with the offline.html file
+        console.warn(`ServiceWorker: ${url} was not found either in the network or the cache. Responding with offline page instead.\n`);
+        return await caches.match(OFFLINE_PAGE_URL) || await fetch(OFFLINE_PAGE_URL, { method: 'GET' });
+  
+      }
+    })());
+  }
+});
+
 workbox.routing.registerRoute(
   /(service-worker\.js)$/,
   new workbox.strategies.NetworkOnly()
 );
 
-workbox.precaching.precacheAndRoute(self.__precacheManifest);
+workbox.precaching.precacheAndRoute((self.__precacheManifest || []).concat([OFFLINE_PAGE_URL]));
 
 workbox.routing.registerRoute(
   /(https:\/\/fonts\.(googleapis|gstatic)\.com)/,

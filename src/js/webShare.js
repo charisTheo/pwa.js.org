@@ -1,10 +1,10 @@
-import { showSnackBar } from "../global/snackBar";
+import { showSnackBar } from "./snackBar";
 
 export const sharePage = async () => {
     if (navigator.share) {
         navigator.share({
             title: document.title,
-            text: '👉 Look at this wonderful PWA! 👈',
+            text: '👉 PWA Wiki: Everything about PWAs is here! 👈',
             url: window.location.href,
         })
         .then(() => console.log('Successful share'))

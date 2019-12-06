@@ -1,4 +1,6 @@
 // https://developers.google.com/web/tools/workbox/guides/configure-workbox
+importScripts('https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js');
+
 // ? Both images are precached in the __precacheManifest file
 const OFFLINE_PAGE_URL = '/offline.html';
 const PLACEHOLDER_IMAGE_URL = '/img/placeholder-image.png';

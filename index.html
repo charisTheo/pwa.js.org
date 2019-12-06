@@ -1,32 +1,802 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><title>4 the ❤️ of PWA</title><meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1"><meta name="theme-color" content="#673ab7"><link rel="shortcut icon" href="./favicon/favicon.ico"><link rel="apple-touch-icon" href="./favicon/apple-touch-icon.png"><link rel="manifest" href="./manifest.json"><meta http-equiv="Access-Control-Allow-Origin" content="*"><link rel="preconnect" href="https://ecommerce-pwa.herokuapp.com" crossorigin><link rel="preconnect" href="https://fonts.googleapis.com" crossorigin><link rel="preconnect" href="https://developers.google.com" crossorigin><link rel="prerender" href="https://developers.google.com/web/updates/2016/09/navigator-share"><link rel="prefetch" href="https://developers.google.com/web/updates/2016/09/navigator-share"><link rel="prerender" href="https://developers.google.com/web/fundamentals/app-install-banners/promoting-install-mobile"><link rel="prefetch" href="https://developers.google.com/web/fundamentals/app-install-banners/promoting-install-mobile"><link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" media="all and (display-mode: browser)"><link rel="shortcut icon" href="favicon.ico"></head><body><div class="container"><paper-toolbar><div slot="top" style="margin-left: 10vw;"><a class="focus-outline" id="fork-me-banner" href="https://github.com/charisTheo/pwa-recipes" aria-label="View source on GitHub" rel="noopener noreferrer" target="_blank"><svg class="focus-outline" tabindex="-1" viewBox="0 0 250 250" aria-hidden="true" style="fill:#ffffff"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" class="octo-arm" style="transform-origin:130px 106px"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"></path></svg></a></div></paper-toolbar><nav><paper-tabs selected="1" align-bottom><custom-style><style is="custom-style">paper-tabs {
-                box-shadow: var(--shadow-elevation-24dp_-_box-shadow);
-                height: 60px;
-              }
-              paper-tabs iron-icon {
-                transition: transform 0.35s ease-out;
-                transform-origin: 50% 50%;
-                --iron-icon-fill-color: var(--primary-color);
-              }
-              paper-tabs paper-tab {
-                @apply --layout-vertical;
-                @apply --layout-center-center;
-                flex-direction: column;
-              }
-              paper-tabs paper-tab.iron-selected iron-icon {
-                transform: scale(1.2);
-              }
-              paper-tabs paper-tab:focus .nav-tab-label {
-                color: var(--paper-tabs-selection-bar-color, var(--accent-color));
-              }
-              paper-tabs paper-tab:focus iron-icon {
-                --iron-icon-fill-color: var(--accent-color);
-              }
-              :root {
-                --paper-tab-ink: var(--accent-color);
-                --paper-tabs-selection-bar-color: var(--accent-color);
-              }</style></custom-style><paper-tab data-navigate-to="info"><iron-icon icon="icons:perm-device-information"></iron-icon><span class="nav-tab-label">Information</span></paper-tab><paper-tab data-navigate-to="apps"><iron-icon icon="icons:apps"></iron-icon><span class="nav-tab-label">Apps</span></paper-tab><paper-tab data-navigate-to="offline-content"><iron-icon icon="icons:cloud-download"></iron-icon><span class="nav-tab-label">Offline content</span></paper-tab></paper-tabs></nav><main class="animate-page"></main><div class="flex-stretch"></div><footer><a class="focus-outline" href="https://developers.google.com/web/updates/2016/09/navigator-share" rel="noopener noreferrer" aria-label="An article about the Web Share API">Sharing is caring<custom-style><style is="custom-style">paper-icon-button.small {
-                width: 20px;
-                height: 20px;
-                padding: 0;
-                top: -6px;
-              }</style></custom-style><paper-icon-button tabindex="-1" class="small" icon="open-in-new"></paper-icon-button></a><span><a class="focus-outline" href="https://www.heropatterns.com/" rel="noopener noreferrer" target="_blank" aria-label="Lovely backgrounds by Hero Patterns dot com">Hero Patterns<paper-icon-button tabindex="-1" class="small" icon="open-in-new"></paper-icon-button></a>👈 Lovely backgrounds</span></footer></div><paper-fab class="page-share-button" src="./img/share-24px.svg" title="heart" aria-label="Tap to share this page"></paper-fab><div id="snackbar"></div><div id="ios-install-banner" hidden>Install this application on your iPhone by tapping <img class="share-ios" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAA1CAYAAAAtf5mbAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NTZCQTRBN0Q2OTdDMTFFNzhCMEZDMTIwMUI0RkQzNjEiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NTZCQTRBN0U2OTdDMTFFNzhCMEZDMTIwMUI0RkQzNjEiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo1NkJBNEE3QjY5N0MxMUU3OEIwRkMxMjAxQjRGRDM2MSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo1NkJBNEE3QzY5N0MxMUU3OEIwRkMxMjAxQjRGRDM2MSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pn8R4UYAAAELSURBVHja7NhLCsIwFAXQRLoQF6SORMGB4BYEQXDgwIEgFJfhxJE7ElfhN75AAg9N2gT7o94LF0VJOKZJKQqllPA1Mil1LopKQbC9nsp00RQYR9ku64ZZ1JWhXuZ1VReMo3oMNqM+zPt11bBPlGAwnSnDbaqCcVSfT8VgOhOG25YN86FcMJ0x9W4+35UF46iBayoHTGdIvZnv0lBXEvEbzgY1op4ixh2pT+qBeinrUnazpvKsWMjYr8is0yeljNoVdlgRN/6OaGgAi43M2bB5Y0P2mGrViiXstiF/PJWhKxt0urH5AQMMMMAAAwwwwBryoFjDAyEuJWCAAQYYYIABBlhL/4P9zxV7CzAARnAcTBPSXp8AAAAASUVORK5CYII="> and then Add to Home Screen<div class="add-ios-container"><img class="add-ios" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACMAAAAjCAYAAAAe2bNZAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6ODUwRjVBMTA2OTdDMTFFNzhCMEZDMTIwMUI0RkQzNjEiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6ODUwRjVBMTE2OTdDMTFFNzhCMEZDMTIwMUI0RkQzNjEiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo1NkJBNEE3RjY5N0MxMUU3OEIwRkMxMjAxQjRGRDM2MSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo1NkJBNEE4MDY5N0MxMUU3OEIwRkMxMjAxQjRGRDM2MSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pv9MYnYAAABJSURBVHja7NYxDgAgCANA6v//jKthc9PkukMusDTdXTNJ6iLngqvBmVUPBQYGBgYGBuYXTEYfcZk336R2wsDAwMDAwHyO2QIMANn2CUO4LuDBAAAAAElFTkSuQmCC"></div><a class="focus-outline" id="ios-install-banner-dismiss-button">Got it</a></div><script src="home.js"></script></body></html>
+<!doctype html><html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>PWA Wiki</title><style>/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif; }
+.mono { font-family: Nitti, 'Microsoft YaHei', '微软雅黑', monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi, '华文楷体', KaiTi_GB2312, '楷体_GB2312', serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, Nitti, 'Microsoft YaHei', '微软雅黑', monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}</style><meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1"><meta name="theme-color" content="#212121"><meta http-equiv="X-UA-Compatible" content="ie=edge"><style>:root {
+      --color-dark-100: #000000;
+      --color-dark-90: #212121;
+      --color-dark-80: #303030;
+      --color-dark-70: #424242;
+      --color-light-100: #ffffff;
+      --color-light-90: #fafafa;
+      --color-light-80: #f5f5f5;
+      --color-light-70: #e0e0e0;
+  
+      --background-color: var(--color-light-70);
+      --text-color: var(--color-dark-90);
+      --heading-color: var(--color-dark-80);
+    }
+	  body {
+      background-color: var(--background-color);
+      color: var(--text-color);
+    }
+    h1, h2, h3, h4, h5, h6 {
+      color: var(--heading-color);    
+    }
+    nav > ul > li {
+      list-style: none;
+    }
+	@media (prefers-color-scheme: dark) {
+	  	:root {
+	      --background-color: var(--color-dark-90);
+	      --text-color: var(--color-light-90);
+	      --heading-color: var(--color-light-80);
+      }
+    }
+
+    article {
+      padding: 15px;
+    }
+    details {
+      color: #ffffff;
+    }
+    figure.callout {
+      background: rgba(255, 235, 59, 0.2);
+    }
+    pre.code {
+      margin: 0 auto;
+      overflow: auto;
+    }
+    ::-webkit-scrollbar {
+     width: 5px;
+     height: 5px;
+     opacity: 0.35;
+	 -webkit-transition: all 0.35s;
+	 -moz-transition: all 0.35s;
+	 -ms-transition: all 0.35s;
+	 -o-transition: all 0.35s;
+	 transition: all 0.35s;
+    }
+    *::-webkit-scrollbar-track {
+       background-color: #151515; 
+    }
+    *::-webkit-scrollbar-thumb {
+       background: #aa00ff;
+    }
+    /* HighlightJS Dracula styles */
+    .hljs{display:block;overflow-x:auto;padding:.5em;background:#282a36}.hljs-keyword,.hljs-link,.hljs-literal,.hljs-section,.hljs-selector-tag{color:#8be9fd}.hljs-function .hljs-keyword{color:#ff79c6}.hljs,.hljs-subst{color:#f8f8f2}.hljs-addition,.hljs-attribute,.hljs-bullet,.hljs-name,.hljs-string,.hljs-symbol,.hljs-template-tag,.hljs-template-variable,.hljs-title,.hljs-type,.hljs-variable{color:#f1fa8c}.hljs-comment,.hljs-deletion,.hljs-meta,.hljs-quote{color:#6272a4}.hljs-doctag,.hljs-keyword,.hljs-literal,.hljs-name,.hljs-section,.hljs-selector-tag,.hljs-strong,.hljs-title,.hljs-type{font-weight:700}.hljs-emphasis{font-style:italic}</style><link rel="shortcut icon" href="./favicon/favicon.ico"><link rel="apple-touch-icon" href="./favicon/apple-touch-icon.png"><link rel="manifest" href="./manifest.json"><script src="./PWA Wiki_files/highlight.min.js"></script><link rel="shortcut icon" href="favicon.ico"></head><body><article id="75de10f8-7390-4ff8-9e0f-ed40d36a0d4c" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="./PWA Wiki_files/pwa.logo.png" alt="The unofficial PWA logo"></div><h1 class="page-title">PWA Wiki</h1></header><div class="page-body"><nav id="f2bb7b81-5e4c-4ba8-9d4a-94a94fddb1c0" class="table_of_contents"><ul><li><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#Web-Perception-API">Web Perception API</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#Service-worker">Service worker</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#Lifecycle">Lifecycle</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#Example">Example</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#New-version">New version</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#Offline">Offline</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#Offline-page">Offline page</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#offline.html"><code>offline.html</code></a></div></li><li><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#Check-offline-status">Check offline status</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#Hide-offline-unavailable-pages">Hide offline unavailable pages</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#Service-worker">Service worker</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#App">App</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#Styles">Styles</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#Workbox">Workbox</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#Precaching">Precaching</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#Cache-index.html-file-">Cache <code>index.html</code> file</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#Caching-Strategy">Caching Strategy</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#Update-service-worker">Update service worker</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#HTML-Streaming">HTML Streaming</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#Splash-Screen-for-PWA-on-iOS">Splash Screen for PWA on iOS</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#Launch-in-fullscreen-mode-on-iOS">Launch in fullscreen mode on iOS</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#Troubleshooting">Troubleshooting</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#Install">Install</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#Catching-Install-event">Catching Install event</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#Install-button-event-listener">Install button event listener</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#Install-banner-for-iOS-(%E2%89%A4-13)">Install banner for iOS (≤ 13)</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#Scroll-into-view-when-keyboard-is-shown-on-mobile">Scroll into view when keyboard is shown on mobile</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#Using-system-fonts">Using system fonts</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#Web-Share-API">Web Share API</a></div></li></ul></nav><hr id="84afefef-aecb-4e31-893a-f7fef5016c03"><ul id="1a9bda35-8753-4cc7-a5ea-853003ac7d84" class="bulleted-list"><li><a href="https://pwa-starter-kit.polymer-project.org/setup">PWA Starter Kit</a></li></ul><ul id="8ccb49fe-d5dc-47a5-9706-4cdc6bb29e48" class="bulleted-list"><li><a href="https://michaljanaszek.com/blog/combine-pwa-and-isomorphic-rendering">PWA and isomorphic rendering (SSR)</a></li></ul><ul id="f6db8260-bd99-4488-bf58-5bce013943d7" class="bulleted-list"><li><a href="https://www.webcomponents.org/collection/FluorescentHallucinogen/progressive-web-components">Progressive Web Components</a></li></ul><ul id="5994b138-2130-42d0-8560-7415ec7b66d6" class="bulleted-list"><li><a href="https://app-manifest.firebaseapp.com/">Manifest and icon generator</a></li></ul><ul id="28a9cafb-360e-46c4-84cb-8d8ae9cd2555" class="bulleted-list"><li><a href="https://css-tricks.com/maskable-icons-android-adaptive-icons-for-your-pwa/">Maskable Icons: Android Adaptive Icons</a></li></ul><hr id="fdd4e428-8940-4056-bfa5-35f0566b37d1"><h1 id="Web-Perception-API" class="">Web Perception API</h1><ul id="06b98000-3443-4bb3-843d-35a558c80059" class="bulleted-list"><li><a href="https://perceptiontoolkit.dev/getting-started/">Example and getting started guide</a></li></ul><h1 id="Service-worker" class="">Service worker</h1><h2 id="Lifecycle" class="">Lifecycle</h2><figure id="81fc3b52-2b80-4298-a131-aeb6d822031e" class="image"><a href="./PWA Wiki_files/Untitled.png"><img style="width:384px" src="./PWA Wiki_files/Untitled.png"></a></figure><p id="3df5377e-8916-40a3-859b-871b966dc8e3" class=""></p><p id="04432166-38f5-4534-8a7f-4e23602cc7b0" class=""></p><h2 id="Example" class="">Example</h2><figure id="2cbfae4f-eac6-4aba-a8c6-4c9e7728e2fa"><div class="source"><a href="https://monbraceletnato.fr/serviceworker.js">https://monbraceletnato.fr/serviceworker.js</a></div></figure><ul id="584dac95-3829-4f5b-aacf-f05667c1a5e2" class="bulleted-list"><li><a href="https://developers.google.com/web/updates/2017/02/navigation-preload">Speed up Service Worker with Navigation Preloads</a><p id="1198f95e-60cb-4f23-a7fd-83edd05d67ed" class="">Inside the <code>'activate'</code> event</p><p id="dbe01ef7-e665-434c-b95a-1bd28f65ebd8" class=""><code>await self.registration.navigationPreload.enable();</code></p><p id="9ad00087-f69b-4ee3-bed1-38108cd10c6a" class=""></p></li></ul><h2 id="New-version" class="">New version</h2><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="b0248036-ed79-42a2-853f-8f37f2ea559b"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Webpack interferes with the service worker registration during the <code>waiting</code> stage so it cannot be tested during development!</div></figure><ul id="378bd787-9601-4ed6-9afa-60e8207f1305" class="bulleted-list"><li>Skip waiting and claim all clients within the service worker<pre id="149c79a1-2a44-4659-93e8-71c34e229644" class="code"><code>self.addEventListener('message', event =&gt; {
+  if (event.data &amp;&amp; event.data.type === 'NEW_VERSION') {
+    workbox.core.clientsClaim();
+    workbox.core.skipWaiting();
+  }
+});</code></pre></li></ul><ul id="95f9c3c6-5fe6-4e42-b2c7-d40e65a2dce9" class="bulleted-list"><li>Attach event listeners during registration - <a href="https://developers.google.com/web/tools/workbox/guides/advanced-recipes#offer_a_page_reload_for_users">Workbox recipe</a><pre id="f36533b4-2f8b-4490-a255-06c953bbe7af" class="code"><code>const registerServiceWorker = () =&gt; {
+    if ('serviceWorker' in navigator) {
+        workBox = new Workbox('./service-worker.js', { scope: '/ecommerce-example-pwa/' });
+
+        workBox.addEventListener('waiting' , () =&gt; {
+            const updateServiceWorker = event =&gt; {
+                event.preventDefault();
+                workBox.addEventListener('controlling', () =&gt; {
+                    window.location.reload();
+                });
+                workBox.messageSW({ type: 'NEW_VERSION'});
+            };
+        
+            window.updateServiceWorker = updateServiceWorker;
+        
+            setTimeout(() =&gt; 
+                showSnackBar('A new version is available &lt;span style="font-size:17px;margin-left:5px"&gt;👉&lt;/span&gt;&lt;a href="#" onclick="window.updateServiceWorker();" class="snackbar-refresh-button"&gt;&amp;#x21BB;&lt;/a&gt;')
+                , 1500
+            );
+        });
+
+        workBox.register();
+    }
+}</code></pre><ul id="00c9323a-90c5-4ec1-9c7e-675fc8d6e19f" class="block-color-gray toggle"><li><details open=""><summary>Vanilla JS (not recommended)</summary><pre id="f3c25b9a-b5ca-4c87-80c9-984fa7fe7649" class="code"><code>const isNewVersionAvailable = await navigator.serviceWorker.register('service-worker.js').then(checkForNewVersion);
+
+const checkForNewVersion = registration =&gt; {
+	return new Promise((resolve, reject) =&gt; {
+	  registration.onupdatefound = () =&gt; {
+			const installingWorker = registration.installing;
+			installingWorker.onstatechange = () =&gt; {
+				switch (installingWorker.state) {
+					case 'installed':
+						if (navigator.serviceWorker.controller) {
+							// new update available
+							resolve(true);
+						} else {
+							// no update available
+							resolve(false);
+						}
+						break;
+				}
+			};
+		};
+  });
+}</code></pre></details></li></ul></li></ul><h2 id="Offline" class="">Offline</h2><ul id="010206df-68d2-4ec0-a4d9-6b04799bb3ad" class="bulleted-list"><li><a href="https://github.com/HubSpot/offline">Offline.js</a><ul id="d89e6a59-2116-4b5e-9e7b-b8c580a84f3f" class="bulleted-list"><li>offline game</li></ul><ul id="3f6db793-f272-4e4e-b04b-32aa5ec0934d" class="bulleted-list"><li>offline notification</li></ul><ul id="7dd1a01b-16ea-4529-a297-de64e8fd04ac" class="bulleted-list"><li>catching requests offline and completing them when back online</li></ul></li></ul><h2 id="Offline-page" class="">Offline page</h2><h3 id="offline.html" class=""><code>offline.html</code></h3><figure id="41e9dc61-032b-4ae2-80ea-a721ff8d1804"><div class="source"><a href="/offline.html">https://s3-us-west-2.amazonaws.com/secure.notion-static.com/4c233deb-851e-411c-9965-b783d42e133d/offline.html</a></div></figure><pre id="057c15df-4f1c-4a1d-9ae5-b457f4d59e78" class="code"><code>addEventListener('fetch', async event =&gt; {
+    if (event.request.mode === 'navigate') {
+      event.respondWith((async () =&gt; {
+        const staleWhileRevalidate = new workbox.strategies.StaleWhileRevalidate();
+        const url = event.request.url;
+        
+        try {
+          // check if the event.request.url exists in the cache or in the network
+          const response = await caches.match(event.request) || await fetch(event.request);
+          if (!response || response.status === 404) {
+            throw new Error(response.status);
+          } else {
+            return await staleWhileRevalidate.handle({event});
+          }
+    
+        } catch (error) {
+          // if not found in any of the two, respond with the offline.html file
+          console.warn(`ServiceWorker: ${url} was not found either in the network or the cache. Responding with offline page instead.\n`);
+          return await caches.match(OFFLINE_PAGE_URL) || await fetch(OFFLINE_PAGE_URL, { method: 'GET' });
+    
+        }
+      })());
+    }
+});</code></pre><h2 id="Check-offline-status" class="">Check offline status</h2><pre id="6562a4a1-4268-4a84-8caf-42094fff9fce" class="code"><code>if (!navigator.connection.downlink) {
+	// is offline
+}</code></pre><h2 id="Hide-offline-unavailable-pages" class="">Hide offline unavailable pages</h2><h3 id="Service-worker" class="">Service worker</h3><pre id="9b266d5a-6fa7-419e-b27d-7c437184a642" class="code"><code>// * store projects' media in a different runtime cache
+// * checking later inside this cache to decide which projects are available offline
+workbox.routing.registerRoute(
+  /\.(?:png|gif|webp|mp4|webm)$/,
+  new workbox.strategies.CacheFirst({
+    cacheName: 'runtime-projects-media'
+  })        
+);</code></pre><h3 id="App" class="">App</h3><pre id="a755481e-8021-4fc8-aa71-e95ed3994d01" class="code"><code>const hideOfflineUnavailableProjects = () =&gt; {
+  const projects = document.querySelectorAll('.project')
+  caches.open('runtime-projects-media').then(projectsRuntimeCache =&gt; {
+    projects.forEach(project =&gt; {
+      projectsRuntimeCache.keys().then(keys =&gt; {
+        const projectMedia = keys.filter(key =&gt; key.url.indexOf(project.id) !== -1);
+        if (!projectMedia.length) {
+          // * reduce opacity of unavailable project pages
+          project.classList.add('unavailable-offline');
+        }
+      });
+    });
+  });
+}</code></pre><h3 id="Styles" class="">Styles</h3><pre id="f71080da-1efe-4a17-85bd-5066bfd6ac56" class="code"><code>.unavailable-offline {
+  opacity: 0.25; 
+  pointer-events: none; 
+}</code></pre><h2 id="Workbox" class="">Workbox</h2><h3 id="Precaching" class="">Precaching</h3><pre id="af67fb1b-bd83-40fd-a135-8c310f3907ad" class="code"><code>workbox.precaching.precacheAndRoute(['/', 'index.html'], 'GET');</code></pre><h3 id="Cache-index.html-file-" class="">Cache <code>index.html</code> file</h3><pre id="6e621547-2926-4b58-aace-cb446d271541" class="code"><code>workbox.routing.registerRoute(
+  /(\/|index\.html)$/,
+  new workbox.strategies.StaleWhileRevalidate()
+);</code></pre><h3 id="Caching-Strategy" class="">Caching Strategy</h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="662d86be-73e6-4013-9dbe-b0d104a09f9f"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Default Cache Strategy is <code>CacheFirst</code></div></figure><pre id="69b38a26-c1bb-4618-9bee-40563be15bfd" class="code"><code>workbox.routing.registerRoute(
+  /\.(?:html|js|css|webp|png|svg|ico)$/,
+  new workbox.strategies.StaleWhileRevalidate()
+);</code></pre><h3 id="Update-service-worker" class="">Update service worker</h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="7c8b45eb-84c7-4197-b8e0-28ba640ffad0"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">By default, a page's fetches won't go through a service worker unless the page request itself went through a service worker. So you'll need to refresh the page to see the effects of the service worker. <code>clients.claim()</code> can override this default, and take control of non-controlled pages</div></figure><pre id="7c025668-429b-4c1e-ab4a-7fc375344e34" class="code"><code>workbox.skipWaiting();
+workbox.clientsClaim();</code></pre><hr id="f5294fcf-cf29-4901-977c-2acbdc5a25d0"><h2 id="HTML-Streaming" class="">HTML Streaming</h2><p id="210af930-e661-4195-bc2f-486e2f1d7f6c" class=""><a href="https://vimeo.com/362260166#t=1871s">Presentation by Philip Walton</a></p><div class="indented"><ul id="44ace825-87dd-4a3c-8f7e-adfa680e92ba" class="bulleted-list"><li>Creating an app shell</li></ul><ul id="d1b8aaf5-52c9-4a97-8c0d-b9f0e94ad011" class="bulleted-list"><li>Loading different parts of the website separately (navigation/app shell from the cache, content from server from NetworkFirst)</li></ul></div><p></p><hr id="c9cdeddd-aa37-48e5-bc84-0ac80ef2675c"><h2 id="Splash-Screen-for-PWA-on-iOS" class="">Splash Screen for PWA on iOS</h2><pre id="4c983f1b-1980-4625-8793-9f9f06b042a3" class="code"><code>&lt;meta name="apple-mobile-web-app-capable" content="yes" /&gt;
+&lt;meta name="apple-mobile-web-app-status-bar-style" content="black"&gt;
+&lt;meta name="apple-mobile-web-app-title" content="Example PWA"&gt;
+&lt;link href="icon-152x152.png" rel="apple-touch-icon"&gt;
+&lt;link href="/apple_splash_2048.png" sizes="2048x2732" rel="apple-touch-startup-image" /&gt;
+&lt;link href="/apple_splash_1668.png" sizes="1668x2224" rel="apple-touch-startup-image" /&gt;
+&lt;link href="/apple_splash_1536.png" sizes="1536x2048" rel="apple-touch-startup-image" /&gt;
+&lt;link href="/apple_splash_1125.png" sizes="1125x2436" rel="apple-touch-startup-image" /&gt;
+&lt;link href="/apple_splash_1242.png" sizes="1242x2208" rel="apple-touch-startup-image" /&gt;
+&lt;link href="/apple_splash_750.png" sizes="750x1334" rel="apple-touch-startup-image" /&gt;
+&lt;link href="/apple_splash_640.png" sizes="640x1136" rel="apple-touch-startup-image" /&gt;</code></pre><hr id="dc361e96-e802-41b0-b40e-1899beb5306f"><h2 id="Launch-in-fullscreen-mode-on-iOS" class="">Launch in fullscreen mode on iOS</h2><ul id="d41879a4-796c-4bb3-800e-3e0220b46926" class="bulleted-list"><li><a href="https://medium.com/@firt/dont-use-ios-web-app-meta-tag-irresponsibly-in-your-progressive-web-apps-85d70f4438cb#0c8a">Article</a></li></ul><pre id="6d0d5946-7193-40c5-86d1-edd799d3f2d2" class="code"><code>&lt;meta name=”apple-mobile-web-app-capable” content=”yes”&gt;</code></pre><hr id="fe9153b4-5623-4689-8def-43937c2c7520"><h2 id="Troubleshooting" class="">Troubleshooting</h2><ul id="8db55c65-4153-4f0e-a6fe-13f3318e4ed3" class="bulleted-list"><li><code>resulted in a network error response: an object that was not a Response was passed to respondWith().</code><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="7ec456bc-50be-42df-875d-83604c7d57d9"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Make sure to inlclude self closing brackets for the function supplied to the <code>event.respondWith()</code> function</div></figure><pre id="9f8fd0a8-1698-40ac-8707-1d2c106aa144" class="code"><code>event.respondWith((async () =&gt; {
+  ...
+  return await caches.match(event.request) || await fetch(event.request);
+  ...
+  // else
+  return await caches.match(OFFLINE_PAGE_URL) || await fetch(OFFLINE_PAGE_URL, { method: 'GET' });
+})());</code></pre></li></ul><hr id="e8308b82-7a2e-4af1-8091-3efb4eb866df"><h1 id="Install" class="">Install</h1><ul id="967d8498-c2af-49d5-926f-ad4890c9a17f" class="bulleted-list"><li><a href="https://medium.com/dev-channel/detect-if-your-native-app-is-installed-from-your-web-site-2e690b7cb6fb">Check for native app installed</a> - <code>getInstalledRelatedApps()</code> (currently Origin Trial) - <a href="https://web.dev/get-installed-related-apps/">web.dev</a></li></ul><h2 id="Catching-Install-event" class="">Catching Install event</h2><pre id="71b677d3-e9ec-41c9-8ca8-97cef19cbbff" class="code"><code>let deferredPromptEvent;
+
+window.addEventListener('beforeinstallprompt', function(e) {
+  e.preventDefault(); 
+  deferredPromptEvent = e; 
+  installButton.style.display = 'block';
+});</code></pre><h2 id="Install-button-event-listener" class="">Install button event listener</h2><pre id="7cc5269c-5533-410e-adf4-2bf2469504a7" class="code"><code>const installButton = document.getElementById('install-button');
+
+installButton.addEventListener('click', function() {
+  installButton.style.display = 'none';
+  deferredPromptEvent.prompt();
+
+  deferredPromptEvent.userChoice.then(function(choiceResult) {
+    console.log(choiceResult.outcome) // 'dismissed' or 'accepted'
+      deferredPromptEvent = null;
+  });
+});</code></pre><h2 id="Install-banner-for-iOS-(≤-13)" class="">Install banner for iOS (≤ 13)</h2><pre id="e996be6a-d6e9-49cc-a846-f4265fde7c34" class="code"><code>// Detects if device is an iOS (including iOS 13) 
+const isIos = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' &amp;&amp; navigator.maxTouchPoints &gt; 1);
+
+// Detects if device is in standalone mode
+const isInStandaloneMode = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+
+// Checks if should display install popup notification:
+if (isIos &amp;&amp; !isInStandaloneMode) {
+  this.setState({ showInstallMessage: true });
+}</code></pre><hr id="e91922b4-a755-40ec-8b4d-8d0e1123c832"><h1 id="Scroll-into-view-when-keyboard-is-shown-on-mobile" class="">Scroll into view when keyboard is shown on mobile</h1><p id="06a98906-c953-4aad-89e7-2b332ae634bf" class=""><code>Element.scrollIntoView()</code></p><hr id="12d5d041-d172-4d05-84b8-7cf9e7f88405"><h1 id="Using-system-fonts" class="">Using system fonts</h1><ul id="276dbe70-017b-47db-95df-6cf75677ea32" class="bulleted-list"><li><a href="https://css-tricks.com/snippets/css/system-font-stack/">CSS tricks article</a><ul id="36a230d3-abc8-43fd-becc-4ee29e0732a1" class="bulleted-list"><li>As used by Github:</li></ul><pre id="de908f8e-d094-408b-ab8f-957d1a931422" class="code"><code>body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}</code></pre></li></ul><pre id="ccf381a7-3785-43e1-8c51-11af3979fbca" class="code"><code>/* iOS */
+font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+/* Android */
+font-family: 'RobotoRegular', 'Droid Sans', sans-serif;
+
+/* Windows Phone */
+font-family: 'Segoe UI', Segoe, Tahoma, Geneva, sans-serif;</code></pre><hr id="7358785c-5a63-47e4-a76b-cb71b91fd473"><h1 id="Web-Share-API" class="">Web Share API</h1><ul id="63b9eb05-edf8-438c-a19d-ac9e30a3ae19" class="bulleted-list"><li>Copy to clipboard <a href="https://gist.github.com/charisTheo/ad749eee1a1bc7ed83c646b04f630847">gist</a></li></ul><ul id="18e8a5cc-38a6-48b3-8a7c-7999f06b4771" class="bulleted-list"><li><a href="https://developers.google.com/web/updates/2016/09/navigator-share">Introducing Web Share API</a></li></ul><ul id="26f91b4e-7ad8-4b82-885a-e77659e3fd58" class="bulleted-list"><li>Web Share API button click event listener <a href="https://gist.github.com/charisTheo/f38dacb5e6884c7c17c8c4295c85cbb6">gist</a></li></ul><hr id="42b2d9c9-a191-49c4-9f6c-9a6553058190"><p id="cde5c007-5b7f-4f57-8187-19e91fecf048" class=""></p></div></article><script src="./PWA Wiki_files/htmlbars.min.js" defer=""></script><script src="./PWA Wiki_files/javascript.min.js" defer=""></script><script src="./PWA Wiki_files/css.min.js" defer=""></script><script type="module">import { showSnackBar } from './js/snackBar.js';
+			// import {  } from './js/util.js';
+			import { Workbox } from 'https://storage.googleapis.com/workbox-cdn/releases/4.0.0/workbox-window.prod.mjs';
+			var workBox;
+
+      hljs.initHighlightingOnLoad();
+
+			if ('serviceWorker' in navigator) {
+				workBox = new Workbox('./service-worker.js', { scope: '/' });
+				workBox.addEventListener('controlling', () => {
+					window.location.reload();
+				});
+				workBox.addEventListener('waiting' , () => {
+					var updateServiceWorker = event => {
+						workBox.messageSW({ type: 'NEW_VERSION'});
+					};
+					window.updateServiceWorker = updateServiceWorker;
+		
+					setTimeout(() => 
+						showSnackBar('A new version is available <span style="font-size:17px;margin-left:5px">👉</span><a href="#" onclick="updateServiceWorker();" class="snackbar-refresh-button">&#x21BB;</a>')
+						, 0
+					);
+				});
+				workBox.register();
+			}</script><div id="snackbar"></div><script src="main.js"></script></body></html>

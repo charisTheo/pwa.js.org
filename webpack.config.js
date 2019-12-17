@@ -23,8 +23,8 @@ const plugins = [
       to: path.resolve(__dirname, 'build/js'),
     },
     {
-      from: path.resolve(__dirname, 'src/PWA Wiki_files'),
-      to: path.resolve(__dirname, 'build/PWA Wiki_files'),
+      from: path.resolve(__dirname, 'src/pwa-wiki_files'),
+      to: path.resolve(__dirname, 'build/pwa-wiki_files'),
     },
     {
       from: path.resolve(__dirname, 'src/favicon'),

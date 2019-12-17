@@ -763,7 +763,41 @@ workbox.clientsClaim();</code></pre><hr id="f5294fcf-cf29-4901-977c-2acbdc5a25d0
 &lt;link href="/apple_splash_1125.png" sizes="1125x2436" rel="apple-touch-startup-image" /&gt;
 &lt;link href="/apple_splash_1242.png" sizes="1242x2208" rel="apple-touch-startup-image" /&gt;
 &lt;link href="/apple_splash_750.png" sizes="750x1334" rel="apple-touch-startup-image" /&gt;
-&lt;link href="/apple_splash_640.png" sizes="640x1136" rel="apple-touch-startup-image" /&gt;</code></pre><hr id="dc361e96-e802-41b0-b40e-1899beb5306f"><h2 id="Launch-in-fullscreen-mode-on-iOS" class="">Launch in fullscreen mode on iOS</h2><ul id="d41879a4-796c-4bb3-800e-3e0220b46926" class="bulleted-list"><li><a href="https://medium.com/@firt/dont-use-ios-web-app-meta-tag-irresponsibly-in-your-progressive-web-apps-85d70f4438cb#0c8a">Article</a></li></ul><pre id="6d0d5946-7193-40c5-86d1-edd799d3f2d2" class="code"><code>&lt;meta name=”apple-mobile-web-app-capable” content=”yes”&gt;</code></pre><hr id="fe9153b4-5623-4689-8def-43937c2c7520"><h1 id="Web-Manifest" class="">Web Manifest</h1><ul id="bd979ad0-b500-4f3b-b46e-05156a16045d" class="bulleted-list"><li><a href="https://gist.github.com/charisTheo/e1f998bad0884625f833d86959ec7dd2#file-manifest-json">Template </a><a href="https://gist.github.com/charisTheo/e1f998bad0884625f833d86959ec7dd2#file-manifest-json"><code>manifest.json</code></a><a href="https://gist.github.com/charisTheo/e1f998bad0884625f833d86959ec7dd2#file-manifest-json"> file</a></li></ul><ul id="eea0f9fe-c250-43f6-8044-9c1757d1740a" class="bulleted-list"><li><a href="https://gist.github.com/charisTheo/9b15f5ec26a95f141565449f5133f73f#file-manifest-webmanifest">Template </a><code><a href="https://gist.github.com/charisTheo/9b15f5ec26a95f141565449f5133f73f#file-manifest-webmanifest">manifest.webmanifest</a></code><a href="https://gist.github.com/charisTheo/9b15f5ec26a95f141565449f5133f73f#file-manifest-webmanifest"> file</a></li></ul><hr id="08dcea7e-fff4-45be-89ac-142b58695582"><h1 id="Install" class="">Install</h1><ul id="967d8498-c2af-49d5-926f-ad4890c9a17f" class="bulleted-list"><li><a href="https://medium.com/dev-channel/detect-if-your-native-app-is-installed-from-your-web-site-2e690b7cb6fb">Check if native app is installed</a> - <code>getInstalledRelatedApps()</code> (currently Origin Trial) - <a href="https://web.dev/get-installed-related-apps/">web.dev</a></li></ul><h2 id="Register-service-worker" class="">Register service worker</h2><ul id="e896e31b-7294-4686-8443-9483d239c8db" class="bulleted-list"><li>In <code>app.js</code></li></ul><pre id="a116b572-543d-4d94-9ad7-ea7ed8e73fdb" class="code"><code>if ('serviceWorker' in navigator) {
+&lt;link href="/apple_splash_640.png" sizes="640x1136" rel="apple-touch-startup-image" /&gt;</code></pre><hr id="dc361e96-e802-41b0-b40e-1899beb5306f"><h2 id="Launch-in-fullscreen-mode-on-iOS" class="">Launch in fullscreen mode on iOS</h2><ul id="d41879a4-796c-4bb3-800e-3e0220b46926" class="bulleted-list"><li><a href="https://medium.com/@firt/dont-use-ios-web-app-meta-tag-irresponsibly-in-your-progressive-web-apps-85d70f4438cb#0c8a">Article</a></li></ul><pre id="6d0d5946-7193-40c5-86d1-edd799d3f2d2" class="code"><code>&lt;meta name=”apple-mobile-web-app-capable” content=”yes”&gt;</code></pre><hr id="fe9153b4-5623-4689-8def-43937c2c7520"><h1 id="Web-Manifest" class="">Web Manifest</h1><ul id="bd979ad0-b500-4f3b-b46e-05156a16045d" class="bulleted-list"><li><a href="https://gist.github.com/charisTheo/e1f998bad0884625f833d86959ec7dd2#file-manifest-json">Template </a><a href="https://gist.github.com/charisTheo/e1f998bad0884625f833d86959ec7dd2#file-manifest-json"><code>manifest.json</code></a><a href="https://gist.github.com/charisTheo/e1f998bad0884625f833d86959ec7dd2#file-manifest-json"> file</a></li></ul><ul id="eea0f9fe-c250-43f6-8044-9c1757d1740a" class="bulleted-list"><li><a href="https://gist.github.com/charisTheo/9b15f5ec26a95f141565449f5133f73f#file-manifest-webmanifest">Template </a><code><a href="https://gist.github.com/charisTheo/9b15f5ec26a95f141565449f5133f73f#file-manifest-webmanifest">manifest.webmanifest</a></code><a href="https://gist.github.com/charisTheo/9b15f5ec26a95f141565449f5133f73f#file-manifest-webmanifest"> file</a></li></ul><ul id="4135446f-4269-40ec-b335-d5190ce3db42" class="bulleted-list"><li>Favicons<pre id="30667350-53ef-4270-9298-66f4ac67a87d" class="code"><code>...
+  "icons": [
+    {
+      "src": "./favicon/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "./favicon/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "./favicon/favicon-64x64.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    },
+    { 
+      "src": "./favicon/android-chrome-192x192.png", 
+      "sizes": "192x192", 
+      "type": "image/png" 
+    },
+    { 
+      "src": "./favicon/android-chrome-512x512.png", 
+      "sizes": "512x512", 
+      "type": "image/png" 
+    },
+    {
+      "src": "./favicon/maskable_icon.png",
+      "sizes": "196x196",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+...</code></pre></li></ul><hr id="08dcea7e-fff4-45be-89ac-142b58695582"><h1 id="Install" class="">Install</h1><ul id="967d8498-c2af-49d5-926f-ad4890c9a17f" class="bulleted-list"><li><a href="https://medium.com/dev-channel/detect-if-your-native-app-is-installed-from-your-web-site-2e690b7cb6fb">Check if native app is installed</a> - <code>getInstalledRelatedApps()</code> (currently Origin Trial) - <a href="https://web.dev/get-installed-related-apps/">web.dev</a></li></ul><h2 id="Register-service-worker" class="">Register service worker</h2><ul id="e896e31b-7294-4686-8443-9483d239c8db" class="bulleted-list"><li>In <code>app.js</code></li></ul><pre id="a116b572-543d-4d94-9ad7-ea7ed8e73fdb" class="code"><code>if ('serviceWorker' in navigator) {
   navigator.serviceWorker
 		.register('/sw.js', { scope: '/' })
 	  .then(registration =&gt; {

@@ -12,6 +12,7 @@ const showSnackBar = message => {
     }
 
     snackBar.classList.add('show');
+    snackBar.classList.add('sans');
     hideSnackBarTimeout = setTimeout(() => {
         snackBar.classList.remove('show');
         snackBar.innerHTML = '';

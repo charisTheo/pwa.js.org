@@ -105,7 +105,7 @@ hr {
 	height: 1px;
 	visibility: visible;
 	border: none;
-	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+	border-bottom: 1px solid rgba(170, 0, 255, 1);
 }
 
 img {
@@ -603,7 +603,73 @@ blockquote {
     pre.code {
       margin: 0 auto;
       overflow: auto;
-    }
+	}
+	
+	#snackbar {
+        position: fixed;
+        z-index: 15;
+        transition: bottom 0.5s ease-out;
+        min-height: 23px;
+        bottom: -150px;
+        left: calc(50% - 170px);
+        width: 320px;
+        background-color: #444444;
+        color: #ffffff;
+        border-radius: 5px;
+        box-shadow: 0px 2px 10px rgba(0,0,0,0.3);
+        padding: 10px;
+        margin: 0;
+        font-weight: 300;
+        font-size: 14px;
+        text-align: center;
+	}
+	#snackbar.show {
+		bottom: 30px;
+	}
+	#snackbar .snackbar-refresh-button {
+		color: var(--google-blue-300); 
+		font-size: 17px;
+		margin: 0;
+		padding: 5px 9px;
+		text-decoration: none;
+		transition: all 0.35s ease-out;
+	}
+	#snackbar .snackbar-refresh-button:focus {
+		outline: none;
+		font-size: 20px;
+		color: var(--accent-color);
+		text-shadow: 0px 3px 2px rgba(0,0,0,0.7);
+	}
+	
+	.focus-outline:focus,
+	.focus-outline.yellow-outline:focus {
+		outline: 3px solid var(--yellow);
+	}
+	.focus-outline.accent-outline:focus {
+		outline: 3px solid var(--accent-color);
+	}
+	
+	@media (max-width: 320px) {
+		#snackbar {
+			left: calc(50% - 150px);
+			width: 280px;
+		}
+	}
+	@media (min-width: 410px) {
+		#snackbar {
+			left: calc(50% - 190px);
+			width: 360px;
+		}
+	}
+	@media (min-width: 767px) {
+		#snackbar {
+			width: 400px;
+			left: calc(50% - 195px);
+		}
+		#snackbar.show {
+			bottom: 120px;
+		}
+	}
     ::-webkit-scrollbar {
      width: 5px;
      height: 5px;
@@ -621,20 +687,33 @@ blockquote {
        background: #aa00ff;
     }
     /* HighlightJS Dracula styles */
-    .hljs{display:block;overflow-x:auto;padding:.5em;background:#282a36}.hljs-keyword,.hljs-link,.hljs-literal,.hljs-section,.hljs-selector-tag{color:#8be9fd}.hljs-function .hljs-keyword{color:#ff79c6}.hljs,.hljs-subst{color:#f8f8f2}.hljs-addition,.hljs-attribute,.hljs-bullet,.hljs-name,.hljs-string,.hljs-symbol,.hljs-template-tag,.hljs-template-variable,.hljs-title,.hljs-type,.hljs-variable{color:#f1fa8c}.hljs-comment,.hljs-deletion,.hljs-meta,.hljs-quote{color:#6272a4}.hljs-doctag,.hljs-keyword,.hljs-literal,.hljs-name,.hljs-section,.hljs-selector-tag,.hljs-strong,.hljs-title,.hljs-type{font-weight:700}.hljs-emphasis{font-style:italic}</style><link rel="shortcut icon" href="./favicon/favicon.ico"><link rel="apple-touch-icon" href="./favicon/apple-touch-icon.png"><link rel="manifest" href="./manifest.json"><script src="./pwa-wiki_files/highlight.min.js"></script><link rel="shortcut icon" href="favicon.ico"></head><body><article id="75de10f8-7390-4ff8-9e0f-ed40d36a0d4c" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="./pwa-wiki_files/pwa.logo.png" alt="The unofficial PWA logo"></div><h1 class="page-title">PWA Wiki</h1></header><div class="page-body"><nav id="f2bb7b81-5e4c-4ba8-9d4a-94a94fddb1c0" class="table_of_contents"><ul><li><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#Service-worker">Service worker</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#Install-event">Install event</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#Activate-event">Activate event</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#Example">Example</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#New-version">New version</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#Offline">Offline</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#Offline-page">Offline page</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#offline.html"><code>offline.html</code></a></div></li><li><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#Check-offline-status">Check offline status</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#Hide-offline-unavailable-pages">Hide offline unavailable pages</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#Service-worker">Service worker</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#App">App</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#Styles">Styles</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#Workbox">Workbox</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#Precaching">Precaching</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#Cache-index.html-file-">Cache <code>index.html</code> file</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#Caching-Strategy">Caching Strategy</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#Update-service-worker">Update service worker</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#HTML-Streaming">HTML Streaming</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#Splash-Screen-for-PWA-on-iOS">Splash Screen for PWA on iOS</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#Launch-in-fullscreen-mode-on-iOS">Launch in fullscreen mode on iOS</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#Web-Manifest">Web Manifest</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#Install">Install</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#Register-service-worker">Register service worker</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#Catching-Install-event">Catching Install event</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#Install-button-event-listener">Install button event listener</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#Install-banner-for-iOS-(%E2%89%A4-13)">Install banner for iOS (≤ 13)</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#Design">Design</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#Maskable-Icons">Maskable Icons</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#Using-system-fonts">Using system fonts</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#Scroll-into-view-when-keyboard-is-shown-on-mobile">Scroll into view when keyboard is shown on mobile</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#Web-Share-API">Web Share API</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#Web-Perception-API">Web Perception API</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#Troubleshooting">Troubleshooting</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#Common-issues">Common issues</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#Workbox-new-version">Workbox new version</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#event.respondWith()">event.respondWith()</a></div></li></ul></nav><hr id="84afefef-aecb-4e31-893a-f7fef5016c03"><ul id="1a9bda35-8753-4cc7-a5ea-853003ac7d84" class="bulleted-list"><li><a href="https://pwa-starter-kit.polymer-project.org/setup">PWA Starter Kit</a></li></ul><ul id="8ccb49fe-d5dc-47a5-9706-4cdc6bb29e48" class="bulleted-list"><li><a href="https://michaljanaszek.com/blog/combine-pwa-and-isomorphic-rendering">PWA and isomorphic rendering (SSR)</a></li></ul><ul id="f6db8260-bd99-4488-bf58-5bce013943d7" class="bulleted-list"><li><a href="https://www.webcomponents.org/collection/FluorescentHallucinogen/progressive-web-components">Progressive Web Components</a></li></ul><ul id="5994b138-2130-42d0-8560-7415ec7b66d6" class="bulleted-list"><li><a href="https://app-manifest.firebaseapp.com/">Manifest and icon generator</a></li></ul><hr id="fdd4e428-8940-4056-bfa5-35f0566b37d1"><h1 id="Service-worker" class="">Service worker</h1><h3 id="Install-event" class="">Install event</h3><pre id="2e3180e2-de42-4dba-bd32-8f6a9f41b4e3" class="code"><code>self.addEventListener('install', function(event) {
+    .hljs{display:block;overflow-x:auto;padding:.5em;background:#282a36}.hljs-keyword,.hljs-link,.hljs-literal,.hljs-section,.hljs-selector-tag{color:#8be9fd}.hljs-function .hljs-keyword{color:#ff79c6}.hljs,.hljs-subst{color:#f8f8f2}.hljs-addition,.hljs-attribute,.hljs-bullet,.hljs-name,.hljs-string,.hljs-symbol,.hljs-template-tag,.hljs-template-variable,.hljs-title,.hljs-type,.hljs-variable{color:#f1fa8c}.hljs-comment,.hljs-deletion,.hljs-meta,.hljs-quote{color:#6272a4}.hljs-doctag,.hljs-keyword,.hljs-literal,.hljs-name,.hljs-section,.hljs-selector-tag,.hljs-strong,.hljs-title,.hljs-type{font-weight:700}.hljs-emphasis{font-style:italic}</style><link rel="shortcut icon" href="./favicon/favicon.ico"><link rel="apple-touch-icon" href="./favicon/apple-touch-icon.png"><link rel="manifest" href="./manifest.json"><script src="./pwa-wiki_files/highlight.min.js"></script><link rel="shortcut icon" href="favicon.ico"></head><body><article id="75de10f8-7390-4ff8-9e0f-ed40d36a0d4c" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="./pwa-wiki_files/pwa.logo.png" alt="The unofficial PWA logo"></div><h1 class="page-title">PWA Wiki</h1></header><div class="page-body"><nav id="f2bb7b81-5e4c-4ba8-9d4a-94a94fddb1c0" class="table_of_contents"><ul><li><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#Tools-&amp;-Resources">Tools &amp; Resources</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#Service-worker">Service worker</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#Caching---Medium-article">Caching - </a><a href="https://medium.com/@charistheodoulou/cache-handling-using-service-workers-and-the-cache-api-on-the-web-7c00c478d39b?source=friends_link&amp;sk=414f61ce6a9b9d612be1d617217422ad">Medium article</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#Workbox-Precaching">Workbox Precaching</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#Workbox-Caching-Strategies---Medium-article">Workbox Caching Strategies - </a><a href="https://medium.com/@charistheodoulou/ebb32f8cbe4d?source=friends_link&amp;sk=606fc308bec8dcd553111f5a79c5e859">Medium article</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#Registration">Registration</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#Updating">Updating</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#Install-event">Install event</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#Activate-event">Activate event</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#Fetch-event">Fetch event</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#Offline">Offline</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#Default-offline-page">Default offline page</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#Mark-offline-unavailable-pages---Medium-article">Mark offline unavailable pages - </a><a href="https://medium.com/@charistheodoulou/5136edea7de1?source=friends_link&amp;sk=1001086f7c6f2cf2bcdc5bff1257bc51">Medium article</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#Placeholder-image%C2%A0fallback---Medium-article">Placeholder image&nbsp;fallback - </a><a href="https://medium.com/@charistheodoulou/bab216e0031e?source=friends_link&amp;sk=bb0473356eb2ed91238ade3b9a844709">Medium article</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#Offer-reload-for-new-version">Offer reload for new version</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#Install---Add-to-Home-screen">Install - Add to Home screen</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#Install-button">Install button</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#NPM">NPM</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#CDN">CDN</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#Custom-implementation">Custom implementation</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#Register-service-worker">Register service worker</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#Catching-Install-event">Catching Install event</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#Install-button-event-listener">Install button event listener</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#Install-banner-for-iOS-(%E2%89%A4-13)">Install banner for iOS (≤ 13)</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#Web-Manifest">Web Manifest</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#Fullscreen-mode-on-iOS">Fullscreen mode on iOS</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#Design">Design</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#Icon-Generators">Icon Generators</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#Favicons---Maskable-icon">Favicons - Maskable icon</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#Windows">Windows</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#iOS">iOS</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#iOS-Splash-screen">iOS Splash screen</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#Using-system-fonts">Using system fonts</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#index.html"><code>index.html</code></a></div></li><li><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#styles.css"><code>styles.css</code></a></div></li><li><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#Github-example">Github example</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#Web-Share-API">Web Share API</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#HTML-Streaming">HTML Streaming</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#Navigation-Preload">Navigation Preload</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#TWA">TWA</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#APK-Generators">APK Generators</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#Web-Perception-API">Web Perception API</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#Troubleshooting">Troubleshooting</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#UI-Fixes">UI Fixes</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#Scroll-into-view-when-keyboard-is-shown-on-mobile">Scroll into view when keyboard is shown on mobile</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#Common-issues">Common issues</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#Workbox-new-version">Workbox new version</a></div></li><li><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#event.respondWith()">event.respondWith()</a></div></li></ul></nav><hr id="84afefef-aecb-4e31-893a-f7fef5016c03"><h1 id="Tools-&amp;-Resources" class="">Tools &amp; Resources</h1><ul id="d8116818-32f9-4eda-8ffa-903d97d050bf" class="bulleted-list"><li><a href="https://pwa-starter-kit.polymer-project.org/setup">PWA Starter Kit</a></li></ul><ul id="c1a50a81-353a-4d1e-a00f-f31f5dd10b5d" class="bulleted-list"><li><a href="https://github.com/pwa-builder/PWABuilder-CLI">PWA Builder CLI</a></li></ul><ul id="8ccb49fe-d5dc-47a5-9706-4cdc6bb29e48" class="bulleted-list"><li><a href="https://michaljanaszek.com/blog/combine-pwa-and-isomorphic-rendering">PWA and isomorphic rendering (SSR)</a></li></ul><ul id="f6db8260-bd99-4488-bf58-5bce013943d7" class="bulleted-list"><li><a href="https://www.webcomponents.org/collection/FluorescentHallucinogen/progressive-web-components">Progressive Web Components</a></li></ul><ul id="f5be524d-eb7c-4b89-9230-6752c509975a" class="bulleted-list"><li>PWA Technical Overview - <a href="https://medium.com/@charistheodoulou/progressive-web-apps-technical-overview-866365132a65">Medium article</a></li></ul><hr id="fdd4e428-8940-4056-bfa5-35f0566b37d1"><h1 id="Service-worker" class="">Service worker</h1><ul id="e251c5e9-da5f-4056-9b2c-f64b1fb51892" class="bulleted-list"><li>Example service worker<figure id="2cbfae4f-eac6-4aba-a8c6-4c9e7728e2fa"><div class="source"><a href="https://monbraceletnato.fr/serviceworker.js">https://monbraceletnato.fr/serviceworker.js</a></div></figure></li></ul><h2 id="Caching---Medium-article" class="">Caching - <a href="https://medium.com/@charistheodoulou/cache-handling-using-service-workers-and-the-cache-api-on-the-web-7c00c478d39b?source=friends_link&amp;sk=414f61ce6a9b9d612be1d617217422ad">Medium article</a></h2><h3 id="Workbox-Precaching" class="">Workbox Precaching</h3><ul id="8e4e2c27-01ce-44b1-a361-a761a4ef0f82" class="bulleted-list"><li>Get Workbox Precache Cache:<p id="40a919c9-8dab-445f-a309-baf141b7b0d0" class=""><code>const cache = await caches.open(workbox.core.cacheNames.precache);</code></p></li></ul><pre id="af67fb1b-bd83-40fd-a135-8c310f3907ad" class="code"><code>workbox.precaching.precacheAndRoute(['/', 'index.html'], 'GET');</code></pre><h3 id="Workbox-Caching-Strategies---Medium-article" class="">Workbox Caching Strategies - <a href="https://medium.com/@charistheodoulou/ebb32f8cbe4d?source=friends_link&amp;sk=606fc308bec8dcd553111f5a79c5e859">Medium article</a></h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="662d86be-73e6-4013-9dbe-b0d104a09f9f"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Default Cache Strategy is <code>CacheFirst</code></div></figure><pre id="69b38a26-c1bb-4618-9bee-40563be15bfd" class="code"><code>workbox.routing.registerRoute(
+  /\.(?:html|js|css|webp|png|svg|ico)$/,
+  new workbox.strategies.StaleWhileRevalidate()
+);</code></pre><ul id="cdd0b5cd-377c-4a7a-823c-a1c0655cb72a" class="bulleted-list"><li>Cache <code>index.html</code> page file<pre id="6e621547-2926-4b58-aace-cb446d271541" class="code"><code>workbox.routing.registerRoute(
+  /(\/|index\.html)$/,
+  new workbox.strategies.StaleWhileRevalidate()
+);</code></pre></li></ul><h2 id="Registration" class="">Registration</h2><pre id="2b115f88-7758-471d-ad37-8e96146cee7d" class="code"><code>/* app.js */
+const SERVICE_WORKER_SCOPE = '/';
+
+window.addEventListener('load', async () =&gt; {
+    if ('serviceWorker' in navigator) {
+        const registration = await navigator.serviceWorker.register('./service-worker.js', { scope: SERVICE_WORKER_SCOPE });
+    }
+});</code></pre><h2 id="Updating" class="">Updating</h2><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="7c8b45eb-84c7-4197-b8e0-28ba640ffad0"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">By default, a page's fetches won't go through a service worker unless the page request itself went through a service worker. So you'll need to refresh the page to see the effects of the service worker. <code>clients.claim()</code> can override this default, and take control of non-controlled pages</div></figure><pre id="7c025668-429b-4c1e-ab4a-7fc375344e34" class="code"><code>workbox.skipWaiting();
+workbox.clientsClaim();</code></pre><h2 id="Install-event" class="">Install event</h2><pre id="2e3180e2-de42-4dba-bd32-8f6a9f41b4e3" class="code"><code>self.addEventListener('install', function(event) {
   event.waitUntil(
     caches.open(cacheName).then(function(cache) {
       return cache.addAll(
         [
           '/css/main.min.css',
           '/js/app.min.js',
-				  '/img/placeholder-image.png'
           '/offline.html'
         ]
       );
     })
   );
-});</code></pre><h3 id="Activate-event" class="">Activate event</h3><pre id="c07848e4-8a3d-4d00-90f1-1c0c18d15f9c" class="code"><code>self.addEventListener('activate', async event =&gt; {
+});</code></pre><h2 id="Activate-event" class="">Activate event</h2><pre id="c07848e4-8a3d-4d00-90f1-1c0c18d15f9c" class="code"><code>self.addEventListener('activate', async event =&gt; {
   await self.registration.navigationPreload.enable();
   event.waitUntil(
     caches.keys().then(function(cacheNames) {
@@ -649,56 +728,29 @@ blockquote {
       );
     })
   );
-});</code></pre><h2 id="Example" class="">Example</h2><figure id="2cbfae4f-eac6-4aba-a8c6-4c9e7728e2fa"><div class="source"><a href="https://monbraceletnato.fr/serviceworker.js">https://monbraceletnato.fr/serviceworker.js</a></div></figure><ul id="584dac95-3829-4f5b-aacf-f05667c1a5e2" class="bulleted-list"><li><a href="https://developers.google.com/web/updates/2017/02/navigation-preload">Speed up Service Worker with Navigation Preloads</a><p id="1198f95e-60cb-4f23-a7fd-83edd05d67ed" class="">Inside the <code>'activate'</code> event</p><p id="dbe01ef7-e665-434c-b95a-1bd28f65ebd8" class=""><code>await self.registration.navigationPreload.enable();</code></p><p id="9ad00087-f69b-4ee3-bed1-38108cd10c6a" class=""></p></li></ul><h2 id="New-version" class="">New version</h2><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="b0248036-ed79-42a2-853f-8f37f2ea559b"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Webpack interferes with the service worker registration during the <code>waiting</code> stage so it cannot be tested during development!</div></figure><ul id="378bd787-9601-4ed6-9afa-60e8207f1305" class="bulleted-list"><li>Skip waiting and claim all clients within the service worker<pre id="149c79a1-2a44-4659-93e8-71c34e229644" class="code"><code>self.addEventListener('message', event =&gt; {
-  if (event.data &amp;&amp; event.data.type === 'NEW_VERSION') {
-    workbox.core.clientsClaim();
-    workbox.core.skipWaiting();
-  }
-});</code></pre></li></ul><ul id="95f9c3c6-5fe6-4e42-b2c7-d40e65a2dce9" class="bulleted-list"><li>Attach event listeners during registration - <a href="https://developers.google.com/web/tools/workbox/guides/advanced-recipes#offer_a_page_reload_for_users">Workbox recipe</a><pre id="f36533b4-2f8b-4490-a255-06c953bbe7af" class="code"><code>const registerServiceWorker = () =&gt; {
-    if ('serviceWorker' in navigator) {
-        workBox = new Workbox('./service-worker.js', { scope: '/ecommerce-example-pwa/' });
-
-        workBox.addEventListener('waiting' , () =&gt; {
-            const updateServiceWorker = event =&gt; {
-                event.preventDefault();
-                workBox.addEventListener('controlling', () =&gt; {
-                    window.location.reload();
-                });
-                workBox.messageSW({ type: 'NEW_VERSION'});
-            };
-        
-            window.updateServiceWorker = updateServiceWorker;
-        
-            setTimeout(() =&gt; 
-                showSnackBar('A new version is available &lt;span style="font-size:17px;margin-left:5px"&gt;👉&lt;/span&gt;&lt;a href="#" onclick="window.updateServiceWorker();" class="snackbar-refresh-button"&gt;&amp;#x21BB;&lt;/a&gt;')
-                , 1500
-            );
-        });
-
-        workBox.register();
-    }
-}</code></pre><ul id="00c9323a-90c5-4ec1-9c7e-675fc8d6e19f" class="block-color-gray toggle"><li><details open=""><summary>Vanilla JS (not recommended)</summary><pre id="f3c25b9a-b5ca-4c87-80c9-984fa7fe7649" class="code"><code>const isNewVersionAvailable = await navigator.serviceWorker.register('service-worker.js').then(checkForNewVersion);
-
-const checkForNewVersion = registration =&gt; {
-	return new Promise((resolve, reject) =&gt; {
-	  registration.onupdatefound = () =&gt; {
-			const installingWorker = registration.installing;
-			installingWorker.onstatechange = () =&gt; {
-				switch (installingWorker.state) {
-					case 'installed':
-						if (navigator.serviceWorker.controller) {
-							// new update available
-							resolve(true);
-						} else {
-							// no update available
-							resolve(false);
-						}
-						break;
-				}
-			};
-		};
-  });
-}</code></pre></details></li></ul></li></ul><h2 id="Offline" class="">Offline</h2><ul id="010206df-68d2-4ec0-a4d9-6b04799bb3ad" class="bulleted-list"><li><a href="https://github.com/HubSpot/offline">Offline.js</a><ul id="d89e6a59-2116-4b5e-9e7b-b8c580a84f3f" class="bulleted-list"><li>offline game</li></ul><ul id="3f6db793-f272-4e4e-b04b-32aa5ec0934d" class="bulleted-list"><li>offline notification</li></ul><ul id="7dd1a01b-16ea-4529-a297-de64e8fd04ac" class="bulleted-list"><li>catching requests offline and completing them when back online</li></ul></li></ul><h2 id="Offline-page" class="">Offline page</h2><h3 id="offline.html" class=""><code>offline.html</code></h3><figure id="41e9dc61-032b-4ae2-80ea-a721ff8d1804"><div class="source"><a href="./PWA%20Wiki/offline.html">https://s3-us-west-2.amazonaws.com/secure.notion-static.com/4c233deb-851e-411c-9965-b783d42e133d/offline.html</a></div></figure><pre id="057c15df-4f1c-4a1d-9ae5-b457f4d59e78" class="code"><code>addEventListener('fetch', async event =&gt; {
+});</code></pre><h2 id="Fetch-event" class="">Fetch event</h2><pre id="9472903a-8e82-43f0-a261-b83a48a08574" class="code"><code>// when the browser requests a resource
+addEventListener('fetch', event =&gt; {
+    event.respondWith(
+        // look in the cache for the resource
+        caches.match(event.request).then(async response =&gt; {
+            if (response) {
+                // is in cache, respond with the cached resource
+                return response;
+            }
+            // if not found fetch it from the network
+            const networkResponse = await fetch(event.request);
+            // response needs to be cloned if going to be used more than once
+            const clonedResponse = networkResponse.clone();
+            
+            // save response to runtime cache for later use
+            const runtimeCache = await caches.open('runtime-cache');
+            runtimeCache.put(event.request, networkResponse);
+            
+            // respond with the cloned network response
+            return Promise.resolve(clonedResponse);
+        })
+    );
+});</code></pre><hr id="290fd70a-415f-4bde-83c3-5c9ef4fe3ae4"><h1 id="Offline" class="">Offline</h1><ul id="010206df-68d2-4ec0-a4d9-6b04799bb3ad" class="bulleted-list"><li><a href="https://github.com/HubSpot/offline">Offline.js</a> - Features:<ul id="d89e6a59-2116-4b5e-9e7b-b8c580a84f3f" class="bulleted-list"><li>offline game</li></ul><ul id="3f6db793-f272-4e4e-b04b-32aa5ec0934d" class="bulleted-list"><li>offline popup notification</li></ul><ul id="7dd1a01b-16ea-4529-a297-de64e8fd04ac" class="bulleted-list"><li>Catching requests offline and completing them when back online</li></ul></li></ul><h2 id="Default-offline-page" class="">Default offline page</h2><figure id="41e9dc61-032b-4ae2-80ea-a721ff8d1804"><div class="source"><a href="./PWA%20Wiki/offline.html">https://s3-us-west-2.amazonaws.com/secure.notion-static.com/4c233deb-851e-411c-9965-b783d42e133d/offline.html</a></div></figure><pre id="057c15df-4f1c-4a1d-9ae5-b457f4d59e78" class="code"><code>addEventListener('fetch', async event =&gt; {
     if (event.request.mode === 'navigate') {
       event.respondWith((async () =&gt; {
         const staleWhileRevalidate = new workbox.strategies.StaleWhileRevalidate();
@@ -721,49 +773,144 @@ const checkForNewVersion = registration =&gt; {
         }
       })());
     }
-});</code></pre><h2 id="Check-offline-status" class="">Check offline status</h2><pre id="6562a4a1-4268-4a84-8caf-42094fff9fce" class="code"><code>if (!navigator.connection.downlink) {
-	// is offline
-}</code></pre><h2 id="Hide-offline-unavailable-pages" class="">Hide offline unavailable pages</h2><h3 id="Service-worker" class="">Service worker</h3><pre id="9b266d5a-6fa7-419e-b27d-7c437184a642" class="code"><code>// * store projects' media in a different runtime cache
+});</code></pre><hr id="d89ca44c-fad9-4b19-915c-0ab37f865427"><h1 id="Mark-offline-unavailable-pages---Medium-article" class="">Mark offline unavailable pages - <a href="https://medium.com/@charistheodoulou/5136edea7de1?source=friends_link&amp;sk=1001086f7c6f2cf2bcdc5bff1257bc51">Medium article</a></h1><ol id="3777a49f-456b-44be-bb7d-be435d7ffa69" class="numbered-list" start="1"><li>Register a route for pages to cache - <code>service-worker.js</code><pre id="9b266d5a-6fa7-419e-b27d-7c437184a642" class="code"><code>// * store projects' media in a different runtime cache
 // * checking later inside this cache to decide which projects are available offline
 workbox.routing.registerRoute(
   /\.(?:png|gif|webp|mp4|webm)$/,
   new workbox.strategies.CacheFirst({
-    cacheName: 'runtime-projects-media'
+    cacheName: 'runtime-pages-media'
   })        
-);</code></pre><h3 id="App" class="">App</h3><pre id="a755481e-8021-4fc8-aa71-e95ed3994d01" class="code"><code>const hideOfflineUnavailableProjects = () =&gt; {
-  const projects = document.querySelectorAll('.project')
-  caches.open('runtime-projects-media').then(projectsRuntimeCache =&gt; {
-    projects.forEach(project =&gt; {
-      projectsRuntimeCache.keys().then(keys =&gt; {
-        const projectMedia = keys.filter(key =&gt; key.url.indexOf(project.id) !== -1);
-        if (!projectMedia.length) {
-          // * reduce opacity of unavailable project pages
-          project.classList.add('unavailable-offline');
+);</code></pre></li></ol><ol id="ec102163-2aa2-4890-ae69-fd24ef95f031" class="numbered-list" start="2"><li>Mark pages when offline - <code>app.js</code><ol id="288ecc16-7fb2-4dd7-be7f-1350db4cb649" class="numbered-list" start="1"><li>Check offline status<ul id="8fda79c8-8aed-46b3-921f-a1d7e4868eea" class="bulleted-list"><li>on startup / window load</li></ul><pre id="6562a4a1-4268-4a84-8caf-42094fff9fce" class="code"><code>if (!navigator.connection.downlink) {
+	// is offline
+}</code></pre><ul id="417a73e9-5ecf-4cbd-b710-906ec234f3a1" class="bulleted-list"><li>on change of network conditions</li></ul><pre id="4418cb3f-45ad-42d1-b751-a923b23ec830" class="code"><code>window.addEventListener('offline', markOfflineUnavailablePages);
+window.addEventListener('online', unmarkOfflineUnavailablePages);</code></pre></li></ol><ol id="22acb43a-739f-40a8-8fe6-ca8fac998762" class="numbered-list" start="2"><li>Handle offline event<pre id="a755481e-8021-4fc8-aa71-e95ed3994d01" class="code"><code>const markOfflineUnavailableProjects = () =&gt; {
+  const pages = document.querySelectorAll('a.page-link');
+
+  caches.open('runtime-pages-media').then(pagesRuntimeCache =&gt; {
+    pages.forEach(page =&gt; {
+      pagesRuntimeCache.keys().then(keys =&gt; {
+        const cachedPage = keys.find(key =&gt; key.url === page.href);
+        
+        if (!cachedPage) {
+          // mark page as unavailable while offline
+          product.classList.add('unavailable-offline');
+        } else {
+          // add the page to a list of offline available pages
         }
+
       });
     });
   });
-}</code></pre><h3 id="Styles" class="">Styles</h3><pre id="f71080da-1efe-4a17-85bd-5066bfd6ac56" class="code"><code>.unavailable-offline {
+}</code></pre></li></ol></li></ol><ol id="260186a5-d834-4e1e-b45c-c833c400f05a" class="numbered-list" start="3"><li>Add styling - <code>styles.css</code><pre id="f71080da-1efe-4a17-85bd-5066bfd6ac56" class="code"><code>.unavailable-offline {
   opacity: 0.25; 
   pointer-events: none; 
-}</code></pre><h2 id="Workbox" class="">Workbox</h2><h3 id="Precaching" class="">Precaching</h3><ul id="8e4e2c27-01ce-44b1-a361-a761a4ef0f82" class="bulleted-list"><li>Get Workbox Precache Cache:<p id="40a919c9-8dab-445f-a309-baf141b7b0d0" class=""><code>const cache = await caches.open(workbox.core.cacheNames.precache);</code></p></li></ul><pre id="af67fb1b-bd83-40fd-a135-8c310f3907ad" class="code"><code>workbox.precaching.precacheAndRoute(['/', 'index.html'], 'GET');</code></pre><h3 id="Cache-index.html-file-" class="">Cache <code>index.html</code> file</h3><pre id="6e621547-2926-4b58-aace-cb446d271541" class="code"><code>workbox.routing.registerRoute(
-  /(\/|index\.html)$/,
-  new workbox.strategies.StaleWhileRevalidate()
-);</code></pre><h3 id="Caching-Strategy" class="">Caching Strategy</h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="662d86be-73e6-4013-9dbe-b0d104a09f9f"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Default Cache Strategy is <code>CacheFirst</code></div></figure><pre id="69b38a26-c1bb-4618-9bee-40563be15bfd" class="code"><code>workbox.routing.registerRoute(
-  /\.(?:html|js|css|webp|png|svg|ico)$/,
-  new workbox.strategies.StaleWhileRevalidate()
-);</code></pre><h3 id="Update-service-worker" class="">Update service worker</h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="7c8b45eb-84c7-4197-b8e0-28ba640ffad0"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">By default, a page's fetches won't go through a service worker unless the page request itself went through a service worker. So you'll need to refresh the page to see the effects of the service worker. <code>clients.claim()</code> can override this default, and take control of non-controlled pages</div></figure><pre id="7c025668-429b-4c1e-ab4a-7fc375344e34" class="code"><code>workbox.skipWaiting();
-workbox.clientsClaim();</code></pre><hr id="f5294fcf-cf29-4901-977c-2acbdc5a25d0"><h2 id="HTML-Streaming" class="">HTML Streaming</h2><p id="210af930-e661-4195-bc2f-486e2f1d7f6c" class=""><a href="https://vimeo.com/362260166#t=1871s">Presentation by Philip Walton</a></p><div class="indented"><ul id="44ace825-87dd-4a3c-8f7e-adfa680e92ba" class="bulleted-list"><li>Creating an app shell</li></ul><ul id="d1b8aaf5-52c9-4a97-8c0d-b9f0e94ad011" class="bulleted-list"><li>Loading different parts of the website separately (navigation/app shell from the cache, content from server from NetworkFirst)</li></ul></div><p></p><hr id="c9cdeddd-aa37-48e5-bc84-0ac80ef2675c"><h2 id="Splash-Screen-for-PWA-on-iOS" class="">Splash Screen for PWA on iOS</h2><pre id="4c983f1b-1980-4625-8793-9f9f06b042a3" class="code"><code>&lt;meta name="apple-mobile-web-app-capable" content="yes" /&gt;
-&lt;meta name="apple-mobile-web-app-status-bar-style" content="black"&gt;
-&lt;meta name="apple-mobile-web-app-title" content="Example PWA"&gt;
-&lt;link href="icon-152x152.png" rel="apple-touch-icon"&gt;
-&lt;link href="/apple_splash_2048.png" sizes="2048x2732" rel="apple-touch-startup-image" /&gt;
-&lt;link href="/apple_splash_1668.png" sizes="1668x2224" rel="apple-touch-startup-image" /&gt;
-&lt;link href="/apple_splash_1536.png" sizes="1536x2048" rel="apple-touch-startup-image" /&gt;
-&lt;link href="/apple_splash_1125.png" sizes="1125x2436" rel="apple-touch-startup-image" /&gt;
-&lt;link href="/apple_splash_1242.png" sizes="1242x2208" rel="apple-touch-startup-image" /&gt;
-&lt;link href="/apple_splash_750.png" sizes="750x1334" rel="apple-touch-startup-image" /&gt;
-&lt;link href="/apple_splash_640.png" sizes="640x1136" rel="apple-touch-startup-image" /&gt;</code></pre><hr id="dc361e96-e802-41b0-b40e-1899beb5306f"><h2 id="Launch-in-fullscreen-mode-on-iOS" class="">Launch in fullscreen mode on iOS</h2><ul id="d41879a4-796c-4bb3-800e-3e0220b46926" class="bulleted-list"><li><a href="https://medium.com/@firt/dont-use-ios-web-app-meta-tag-irresponsibly-in-your-progressive-web-apps-85d70f4438cb#0c8a">Article</a></li></ul><pre id="6d0d5946-7193-40c5-86d1-edd799d3f2d2" class="code"><code>&lt;meta name=”apple-mobile-web-app-capable” content=”yes”&gt;</code></pre><hr id="fe9153b4-5623-4689-8def-43937c2c7520"><h1 id="Web-Manifest" class="">Web Manifest</h1><ul id="bd979ad0-b500-4f3b-b46e-05156a16045d" class="bulleted-list"><li><a href="https://gist.github.com/charisTheo/e1f998bad0884625f833d86959ec7dd2#file-manifest-json">Template </a><a href="https://gist.github.com/charisTheo/e1f998bad0884625f833d86959ec7dd2#file-manifest-json"><code>manifest.json</code></a><a href="https://gist.github.com/charisTheo/e1f998bad0884625f833d86959ec7dd2#file-manifest-json"> file</a></li></ul><ul id="eea0f9fe-c250-43f6-8044-9c1757d1740a" class="bulleted-list"><li><a href="https://gist.github.com/charisTheo/9b15f5ec26a95f141565449f5133f73f#file-manifest-webmanifest">Template </a><code><a href="https://gist.github.com/charisTheo/9b15f5ec26a95f141565449f5133f73f#file-manifest-webmanifest">manifest.webmanifest</a></code><a href="https://gist.github.com/charisTheo/9b15f5ec26a95f141565449f5133f73f#file-manifest-webmanifest"> file</a></li></ul><ul id="4135446f-4269-40ec-b335-d5190ce3db42" class="bulleted-list"><li>Favicons<pre id="30667350-53ef-4270-9298-66f4ac67a87d" class="code"><code>...
+}</code></pre></li></ol><hr id="f5294fcf-cf29-4901-977c-2acbdc5a25d0"><h1 id="Placeholder-image fallback---Medium-article" class="">Placeholder image&nbsp;fallback - <a href="https://medium.com/@charistheodoulou/bab216e0031e?source=friends_link&amp;sk=bb0473356eb2ed91238ade3b9a844709">Medium article</a></h1><ul id="d40d23d0-8a83-41bf-8f4f-f4a43e47ed38" class="bulleted-list"><li>Add code inside <code>service-worker.js</code> only</li></ul><pre id="4dc778c6-0cb9-4ae8-ba40-5c15b3984e17" class="code"><code>const placeholderImageURL = '/img/placeholder-image.png'; // precache this in __precacheManifest file
+workbox.precaching.precacheAndRoute(self.__precacheManifest || []);
+
+workbox.routing.registerRoute(
+  /\.(?:webp|png|jpg|jpeg|svg)$/,
+  async ({url, event, params}) =&gt; {
+    const staleWhileRevalidate = new workbox.strategies.StaleWhileRevalidate();
+
+    try {
+      const response = await caches.match(event.request) || await fetch(url, { method: 'GET' });
+      if (!response || response.status === 404) {
+        throw new Error(response.status);
+      } else {
+        return await staleWhileRevalidate.handle({event});
+      }
+
+    } catch (error) {
+      console.warn(`\nServiceWorker: Image [${url.href}] was not found either in the network or the cache. Responding with placeholder image instead.\n`);
+      // * get placeholder image from cache || get placeholder image from network
+      return await caches.match(placeholderImageURL) || await fetch(placeholderImageURL, { method: 'GET' });
+
+    }
+  }
+);</code></pre><hr id="1c907102-6563-4d43-a818-40cb72dbc47a"><h1 id="Offer-reload-for-new-version" class="">Offer reload for new version</h1><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="b0248036-ed79-42a2-853f-8f37f2ea559b"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Webpack interferes with the service worker registration during the <code>waiting</code> stage so it cannot be tested during development!</div></figure><ul id="378bd787-9601-4ed6-9afa-60e8207f1305" class="bulleted-list"><li>Skip waiting and claim all clients within the service worker<pre id="149c79a1-2a44-4659-93e8-71c34e229644" class="code"><code>self.addEventListener('message', event =&gt; {
+  if (event.data &amp;&amp; event.data.type === 'NEW_VERSION') {
+    workbox.core.clientsClaim();
+    workbox.core.skipWaiting();
+  }
+});</code></pre></li></ul><ul id="95f9c3c6-5fe6-4e42-b2c7-d40e65a2dce9" class="bulleted-list"><li>Attach event listeners during registration - <a href="https://developers.google.com/web/tools/workbox/guides/advanced-recipes#offer_a_page_reload_for_users">Workbox recipe</a><pre id="f36533b4-2f8b-4490-a255-06c953bbe7af" class="code"><code>const registerServiceWorker = () =&gt; {
+    if ('serviceWorker' in navigator) {
+        workBox = new Workbox('./service-worker.js', { scope: '/' });
+
+        workBox.addEventListener('waiting' , () =&gt; {
+            const updateServiceWorker = event =&gt; {
+                event.preventDefault();
+                workBox.addEventListener('controlling', () =&gt; {
+                    window.location.reload();
+                });
+                workBox.messageSW({ type: 'NEW_VERSION'});
+            };
+        
+            window.updateServiceWorker = updateServiceWorker;
+        
+            setTimeout(() =&gt; 
+                showSnackBar('Reload to see new version &lt;span style="font-size:17px;margin-left:5px"&gt;👉&lt;/span&gt;&lt;a href="#" onclick="window.updateServiceWorker();"&gt;&amp;#x21BB;&lt;/a&gt;')
+                , 1500
+            );
+        });
+
+        workBox.register();
+    }
+}</code></pre><ul id="00c9323a-90c5-4ec1-9c7e-675fc8d6e19f" class="block-color-gray toggle"><li><details open=""><summary>Vanilla JS (not recommended)</summary><ul id="b4dfa8cc-068d-45bb-bc1b-6e23f8335778" class="bulleted-list"><li><mark class="highlight-red">This method is </mark><mark class="highlight-red"><strong>not</strong></mark><mark class="highlight-red"> recommended as inconsistencies where observed during testing.</mark></li></ul><pre id="f3c25b9a-b5ca-4c87-80c9-984fa7fe7649" class="code"><code>const isNewVersionAvailable = await navigator.serviceWorker.register('service-worker.js').then(checkForNewVersion);
+
+const checkForNewVersion = registration =&gt; {
+	return new Promise((resolve, reject) =&gt; {
+	  registration.onupdatefound = () =&gt; {
+			const installingWorker = registration.installing;
+			installingWorker.onstatechange = () =&gt; {
+				switch (installingWorker.state) {
+					case 'installed':
+						if (navigator.serviceWorker.controller) {
+							// new update available
+							resolve(true);
+						} else {
+							// no update available
+							resolve(false);
+						}
+						break;
+				}
+			};
+		};
+  });
+}</code></pre></details></li></ul></li></ul><hr id="afa7948c-0205-41a5-b1da-f4092b7ee9b3"><h1 id="Install---Add-to-Home-screen" class="">Install - Add to Home screen</h1><ul id="967d8498-c2af-49d5-926f-ad4890c9a17f" class="bulleted-list"><li><a href="https://medium.com/dev-channel/detect-if-your-native-app-is-installed-from-your-web-site-2e690b7cb6fb">Check if native app is installed</a> - <code>getInstalledRelatedApps()</code> (currently Origin Trial) - <a href="https://web.dev/get-installed-related-apps/">web.dev</a></li></ul><h2 id="Install-button" class="">Install button</h2><ul id="d3964beb-7788-4d71-8f9b-c761309be992" class="bulleted-list"><li><a href="https://medium.com/pwabuilder/installing-progressive-web-apps-b7274ebffe80">Medium article</a> by PWABuilder</li></ul><ul id="10aa0210-5590-430b-b99b-ffbb34053680" class="bulleted-list"><li><a href="https://www.npmjs.com/package/@pwabuilder/pwainstall">npm package</a></li></ul><h3 id="NPM" class="">NPM</h3><ol id="88bff71b-5cce-45aa-98ec-144c082c10f0" class="numbered-list" start="1"><li>Install npm package: <code>npm install @pwabuilder/pwainstall</code></li></ol><ol id="5b0f3120-b9d2-4362-965b-d1321fd70b32" class="numbered-list" start="2"><li>Import inside your app scripts: <code>import '@pwabuilder/pwainstall'</code></li></ol><h3 id="CDN" class="">CDN</h3><ol id="02d17533-8e3a-4335-a7fe-c18eaac4d28a" class="numbered-list" start="1"><li>Include module in <code>index.html</code>:<pre id="0fc12727-61ae-4ff0-8363-8e0f8eae7928" class="code"><code>&lt;script
+  type="module"
+  src="https://cdn.jsdelivr.net/npm/@pwabuilder/pwainstall"
+&gt;&lt;/script&gt;</code></pre></li></ol><p id="1349e104-6019-42f5-9ff8-3c46336028f9" class="">Then you can use the element <code>&lt;pwa-install&gt;&lt;/pwa-install&gt;</code> inside your html files.</p><h2 id="Custom-implementation" class="">Custom implementation</h2><h3 id="Register-service-worker" class="">Register service worker</h3><ul id="e896e31b-7294-4686-8443-9483d239c8db" class="bulleted-list"><li>In <code>app.js</code></li></ul><pre id="a116b572-543d-4d94-9ad7-ea7ed8e73fdb" class="code"><code>if ('serviceWorker' in navigator) {
+  navigator.serviceWorker
+		.register('/sw.js', { scope: '/' })
+	  .then(registration =&gt; {
+	    
+	  });
+}</code></pre><h3 id="Catching-Install-event" class="">Catching Install event</h3><pre id="71b677d3-e9ec-41c9-8ca8-97cef19cbbff" class="code"><code>let deferredPromptEvent;
+
+window.addEventListener('beforeinstallprompt', function(e) {
+  e.preventDefault(); 
+  deferredPromptEvent = e; 
+  installButton.style.display = 'block';
+});</code></pre><h3 id="Install-button-event-listener" class="">Install button event listener</h3><pre id="7cc5269c-5533-410e-adf4-2bf2469504a7" class="code"><code>const installButton = document.getElementById('install-button');
+
+installButton.addEventListener('click', function() {
+  installButton.style.display = 'none';
+  deferredPromptEvent.prompt();
+
+  deferredPromptEvent.userChoice.then(function(choiceResult) {
+    console.log(choiceResult.outcome) // 'dismissed' or 'accepted'
+      deferredPromptEvent = null;
+  });
+});</code></pre><h3 id="Install-banner-for-iOS-(≤-13)" class="">Install banner for iOS (≤ 13)</h3><pre id="e996be6a-d6e9-49cc-a846-f4265fde7c34" class="code"><code>// Detects if device is an iOS (including iOS 13) 
+const isIos = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' &amp;&amp; navigator.maxTouchPoints &gt; 1);
+
+// Detects if device is in standalone mode
+const isInStandaloneMode = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+
+// Checks if should display install popup notification:
+if (isIos &amp;&amp; !isInStandaloneMode) {
+  this.setState({ showInstallMessage: true });
+}</code></pre><hr id="e91922b4-a755-40ec-8b4d-8d0e1123c832"><h1 id="Web-Manifest" class="">Web Manifest</h1><ul id="bd979ad0-b500-4f3b-b46e-05156a16045d" class="bulleted-list"><li><a href="https://gist.github.com/charisTheo/e1f998bad0884625f833d86959ec7dd2#file-manifest-json">Template </a><a href="https://gist.github.com/charisTheo/e1f998bad0884625f833d86959ec7dd2#file-manifest-json"><code>manifest.json</code></a><a href="https://gist.github.com/charisTheo/e1f998bad0884625f833d86959ec7dd2#file-manifest-json"> file</a></li></ul><ul id="eea0f9fe-c250-43f6-8044-9c1757d1740a" class="bulleted-list"><li><a href="https://gist.github.com/charisTheo/9b15f5ec26a95f141565449f5133f73f#file-manifest-webmanifest">Template </a><code><a href="https://gist.github.com/charisTheo/9b15f5ec26a95f141565449f5133f73f#file-manifest-webmanifest">manifest.webmanifest</a></code><a href="https://gist.github.com/charisTheo/9b15f5ec26a95f141565449f5133f73f#file-manifest-webmanifest"> file</a></li></ul><hr id="08dcea7e-fff4-45be-89ac-142b58695582"><h2 id="Fullscreen-mode-on-iOS" class="">Fullscreen mode on iOS</h2><ul id="d41879a4-796c-4bb3-800e-3e0220b46926" class="bulleted-list"><li><a href="https://medium.com/@firt/dont-use-ios-web-app-meta-tag-irresponsibly-in-your-progressive-web-apps-85d70f4438cb#0c8a">Article</a></li></ul><pre id="6d0d5946-7193-40c5-86d1-edd799d3f2d2" class="code"><code>&lt;meta name=”apple-mobile-web-app-capable” content=”yes”&gt;</code></pre><hr id="4589a381-ff3f-4d3c-b64e-923750e9003d"><h1 id="Design" class="">Design</h1><h2 id="Icon-Generators" class="">Icon Generators</h2><ul id="1784e8e0-3c37-4e70-bf90-aabdbae5830e" class="bulleted-list"><li><a href="https://app-manifest.firebaseapp.com/">Manifest and icon generator</a></li></ul><ul id="c3cb7fb1-e8cf-425f-af4e-934c0bc4aebb" class="bulleted-list"><li><a href="https://github.com/onderceylan/pwa-asset-generator">Asset generator</a></li></ul><ul id="d783b64a-7982-494e-a6dc-0848949bc367" class="bulleted-list"><li><a href="https://maskable.app/editor">Maskable icon creator</a></li></ul><h2 id="Favicons---Maskable-icon" class="">Favicons - Maskable icon</h2><ul id="3d0b6db7-6b2c-4b0d-9627-3d3eae35ca22" class="bulleted-list"><li><a href="https://css-tricks.com/maskable-icons-android-adaptive-icons-for-your-pwa/">Android Adaptive Icons</a> (CSS-tricks article)</li></ul><pre id="30667350-53ef-4270-9298-66f4ac67a87d" class="code"><code>...
   "icons": [
     {
       "src": "./favicon/favicon-16x16.png",
@@ -797,65 +944,34 @@ workbox.clientsClaim();</code></pre><hr id="f5294fcf-cf29-4901-977c-2acbdc5a25d0
       "purpose": "maskable"
     }
   ],
-...</code></pre></li></ul><hr id="08dcea7e-fff4-45be-89ac-142b58695582"><h1 id="Install" class="">Install</h1><ul id="967d8498-c2af-49d5-926f-ad4890c9a17f" class="bulleted-list"><li><a href="https://medium.com/dev-channel/detect-if-your-native-app-is-installed-from-your-web-site-2e690b7cb6fb">Check if native app is installed</a> - <code>getInstalledRelatedApps()</code> (currently Origin Trial) - <a href="https://web.dev/get-installed-related-apps/">web.dev</a></li></ul><h2 id="Register-service-worker" class="">Register service worker</h2><ul id="e896e31b-7294-4686-8443-9483d239c8db" class="bulleted-list"><li>In <code>app.js</code></li></ul><pre id="a116b572-543d-4d94-9ad7-ea7ed8e73fdb" class="code"><code>if ('serviceWorker' in navigator) {
-  navigator.serviceWorker
-		.register('/sw.js', { scope: '/' })
-	  .then(registration =&gt; {
-	    
-	  });
-}</code></pre><h2 id="Catching-Install-event" class="">Catching Install event</h2><pre id="71b677d3-e9ec-41c9-8ca8-97cef19cbbff" class="code"><code>let deferredPromptEvent;
-
-window.addEventListener('beforeinstallprompt', function(e) {
-  e.preventDefault(); 
-  deferredPromptEvent = e; 
-  installButton.style.display = 'block';
-});</code></pre><h2 id="Install-button-event-listener" class="">Install button event listener</h2><pre id="7cc5269c-5533-410e-adf4-2bf2469504a7" class="code"><code>const installButton = document.getElementById('install-button');
-
-installButton.addEventListener('click', function() {
-  installButton.style.display = 'none';
-  deferredPromptEvent.prompt();
-
-  deferredPromptEvent.userChoice.then(function(choiceResult) {
-    console.log(choiceResult.outcome) // 'dismissed' or 'accepted'
-      deferredPromptEvent = null;
-  });
-});</code></pre><h2 id="Install-banner-for-iOS-(≤-13)" class="">Install banner for iOS (≤ 13)</h2><pre id="e996be6a-d6e9-49cc-a846-f4265fde7c34" class="code"><code>// Detects if device is an iOS (including iOS 13) 
-const isIos = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' &amp;&amp; navigator.maxTouchPoints &gt; 1);
-
-// Detects if device is in standalone mode
-const isInStandaloneMode = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
-
-// Checks if should display install popup notification:
-if (isIos &amp;&amp; !isInStandaloneMode) {
-  this.setState({ showInstallMessage: true });
-}</code></pre><hr id="e91922b4-a755-40ec-8b4d-8d0e1123c832"><h1 id="Design" class="">Design</h1><h2 id="Maskable-Icons" class="">Maskable Icons</h2><ul id="ce834153-02f9-4712-b602-3179e3c7e949" class="bulleted-list"><li><a href="https://maskable.app/editor">Maskable icon creator</a></li></ul><ul id="3d0b6db7-6b2c-4b0d-9627-3d3eae35ca22" class="bulleted-list"><li><a href="https://css-tricks.com/maskable-icons-android-adaptive-icons-for-your-pwa/">Android Adaptive Icons</a> (CSS-tricks article)</li></ul><pre id="228e176c-c319-420c-90cf-601491ab14b0" class="code"><code>{
-  ...
-  "icons": [
-    ...
-    {
-      "src": "path/to/maskable_icon.png",
-      "sizes": "196x196",
-      "type": "image/png",
-      "purpose": "maskable"
-  ]
-  ...
-}</code></pre><hr id="7e02957c-6cf8-4b3e-a3c7-49327acc6714"><h1 id="Using-system-fonts" class="">Using system fonts</h1><ul id="276dbe70-017b-47db-95df-6cf75677ea32" class="bulleted-list"><li><a href="https://css-tricks.com/snippets/css/system-font-stack/">CSS tricks article</a></li></ul><pre id="ccf381a7-3785-43e1-8c51-11af3979fbca" class="code"><code>/* iOS */
+...</code></pre><p id="422fa1e0-9322-40f5-8ef2-dbe90794be2a" class=""></p><h3 id="Windows" class="">Windows</h3><pre id="bf41f5b5-f00f-46d4-83b7-6a342e0b5829" class="code"><code>&lt;meta name="msapplication-square70x70logo" content="icon_smalltile.png"&gt;
+&lt;meta name="msapplication-square150x150logo" content="icon_mediumtile.png"&gt;
+&lt;meta name="msapplication-wide310x150logo" content="icon_widetile.png"&gt;</code></pre><h3 id="iOS" class="">iOS</h3><pre id="4c983f1b-1980-4625-8793-9f9f06b042a3" class="code"><code>&lt;meta name="apple-mobile-web-app-capable" content="yes" /&gt;
+&lt;meta name="apple-mobile-web-app-status-bar-style" content="black"&gt;
+&lt;meta name="apple-mobile-web-app-title" content="Example PWA"&gt;
+&lt;link href="icon-152x152.png" rel="apple-touch-icon"&gt;</code></pre><h3 id="iOS-Splash-screen" class="">iOS Splash screen</h3><pre id="5f877de8-9d3c-4b30-8998-723d7459f64b" class="code"><code>&lt;link href="/apple_splash_2048.png" sizes="2048x2732" rel="apple-touch-startup-image" /&gt;
+&lt;link href="/apple_splash_1668.png" sizes="1668x2224" rel="apple-touch-startup-image" /&gt;
+&lt;link href="/apple_splash_1536.png" sizes="1536x2048" rel="apple-touch-startup-image" /&gt;
+&lt;link href="/apple_splash_1125.png" sizes="1125x2436" rel="apple-touch-startup-image" /&gt;
+&lt;link href="/apple_splash_1242.png" sizes="1242x2208" rel="apple-touch-startup-image" /&gt;
+&lt;link href="/apple_splash_750.png" sizes="750x1334" rel="apple-touch-startup-image" /&gt;
+&lt;link href="/apple_splash_640.png" sizes="640x1136" rel="apple-touch-startup-image" /&gt;</code></pre><hr id="e84c702e-8676-4642-8ca1-ce8526d5e82b"><h2 id="Using-system-fonts" class="">Using system fonts</h2><ul id="276dbe70-017b-47db-95df-6cf75677ea32" class="bulleted-list"><li><a href="https://css-tricks.com/snippets/css/system-font-stack/">CSS tricks article</a></li></ul><h3 id="index.html" class=""><code>index.html</code></h3><pre id="1450b5c8-c99e-40dc-8da7-b30aa01011b5" class="code"><code>&lt;!-- ! Download Google fonts only if launched in the browser -&gt; Else use system fonts --&gt;
+&lt;link href="https://fonts.googleapis.com/css?family=Open+Sans&amp;display=swap" rel="stylesheet" media="all and (display-mode: browser)" /&gt;</code></pre><h3 id="styles.css" class=""><code>styles.css</code></h3><pre id="ccf381a7-3785-43e1-8c51-11af3979fbca" class="code"><code>/* iOS */
 font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
 /* Android */
 font-family: 'RobotoRegular', 'Droid Sans', sans-serif;
 
 /* Windows Phone */
-font-family: 'Segoe UI', Segoe, Tahoma, Geneva, sans-serif;</code></pre><ul id="36a230d3-abc8-43fd-becc-4ee29e0732a1" class="bulleted-list"><li>As used by Github:</li></ul><pre id="de908f8e-d094-408b-ab8f-957d1a931422" class="code"><code>body {
+font-family: 'Segoe UI', Segoe, Tahoma, Geneva, sans-serif;</code></pre><h3 id="Github-example" class="">Github example</h3><pre id="de908f8e-d094-408b-ab8f-957d1a931422" class="code"><code>body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-}</code></pre><hr id="7358785c-5a63-47e4-a76b-cb71b91fd473"><h1 id="Scroll-into-view-when-keyboard-is-shown-on-mobile" class="">Scroll into view when keyboard is shown on mobile</h1><p id="06a98906-c953-4aad-89e7-2b332ae634bf" class=""><code>Element.scrollIntoView()</code></p><hr id="12d5d041-d172-4d05-84b8-7cf9e7f88405"><h1 id="Web-Share-API" class="">Web Share API</h1><ul id="63b9eb05-edf8-438c-a19d-ac9e30a3ae19" class="bulleted-list"><li>Copy to clipboard <a href="https://gist.github.com/charisTheo/ad749eee1a1bc7ed83c646b04f630847">gist</a></li></ul><ul id="18e8a5cc-38a6-48b3-8a7c-7999f06b4771" class="bulleted-list"><li><a href="https://developers.google.com/web/updates/2016/09/navigator-share">Introducing Web Share API</a></li></ul><ul id="26f91b4e-7ad8-4b82-885a-e77659e3fd58" class="bulleted-list"><li>Web Share API button click event listener <a href="https://gist.github.com/charisTheo/f38dacb5e6884c7c17c8c4295c85cbb6">gist</a></li></ul><hr id="42b2d9c9-a191-49c4-9f6c-9a6553058190"><h1 id="Web-Perception-API" class="">Web Perception API</h1><ul id="06b98000-3443-4bb3-843d-35a558c80059" class="bulleted-list"><li><a href="https://perceptiontoolkit.dev/getting-started/">Example and getting started guide</a></li></ul><hr id="17537f13-65d7-456d-b51b-4065a570d808"><h1 id="Troubleshooting" class="">Troubleshooting</h1><h2 id="Common-issues" class="">Common issues</h2><h3 id="Workbox-new-version" class="">Workbox new version</h3><ul id="013d9c41-f4f7-487c-b6b7-a4329decaf0e" class="bulleted-list"><li>When implementing the new version popup make sure that the tracked files have a revision string on the end of the request inside the cache by workbox.<p id="c01dde6b-799a-482c-acac-057b795463ab" class=""><code>/home.js?</code><code><strong>WB_REVISION</strong></code><code>=df42c4e7c6b43998e5ba</code></p></li></ul><h3 id="event.respondWith()" class="">event.respondWith()</h3><ul id="8db55c65-4153-4f0e-a6fe-13f3318e4ed3" class="bulleted-list"><li><code>resulted in a network error response: an object that was not a Response was passed to respondWith().</code><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="7ec456bc-50be-42df-875d-83604c7d57d9"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Make sure to inlclude self closing brackets for the function supplied to the <code>event.respondWith()</code> function</div></figure><pre id="9f8fd0a8-1698-40ac-8707-1d2c106aa144" class="code"><code>event.respondWith((async () =&gt; {
+}</code></pre><hr id="7358785c-5a63-47e4-a76b-cb71b91fd473"><h1 id="Web-Share-API" class="">Web Share API</h1><ul id="63b9eb05-edf8-438c-a19d-ac9e30a3ae19" class="bulleted-list"><li>Copy to clipboard <a href="https://gist.github.com/charisTheo/ad749eee1a1bc7ed83c646b04f630847">gist</a></li></ul><ul id="18e8a5cc-38a6-48b3-8a7c-7999f06b4771" class="bulleted-list"><li><a href="https://developers.google.com/web/updates/2016/09/navigator-share">Introducing Web Share API</a></li></ul><ul id="26f91b4e-7ad8-4b82-885a-e77659e3fd58" class="bulleted-list"><li>Web Share API button click event listener <a href="https://gist.github.com/charisTheo/f38dacb5e6884c7c17c8c4295c85cbb6">gist</a></li></ul><hr id="d9a5c780-bf62-482f-9fc5-dd8742a71c23"><h1 id="HTML-Streaming" class="">HTML Streaming</h1><p id="210af930-e661-4195-bc2f-486e2f1d7f6c" class=""><a href="https://vimeo.com/362260166#t=1871s">Presentation by Philip Walton</a></p><div class="indented"><ul id="44ace825-87dd-4a3c-8f7e-adfa680e92ba" class="bulleted-list"><li>Creating an app shell</li></ul><ul id="d1b8aaf5-52c9-4a97-8c0d-b9f0e94ad011" class="bulleted-list"><li>Loading different parts of the website separately (navigation/app shell from the cache, content from server from NetworkFirst)</li></ul></div><p></p><hr id="c9cdeddd-aa37-48e5-bc84-0ac80ef2675c"><h1 id="Navigation-Preload" class="">Navigation Preload</h1><ul id="bb762e86-eca1-43fc-b959-dd25ba809f13" class="bulleted-list"><li><a href="https://developers.google.com/web/updates/2017/02/navigation-preload">Speed up Service Worker with Navigation Preloads</a><p id="1198f95e-60cb-4f23-a7fd-83edd05d67ed" class="">Inside the <code>'activate'</code> event</p><p id="dbe01ef7-e665-434c-b95a-1bd28f65ebd8" class=""><code>await self.registration.navigationPreload.enable();</code></p></li></ul><hr id="1dcf0b46-c296-49bc-b179-35b5a9517900"><h1 id="TWA" class="">TWA</h1><h2 id="APK-Generators" class="">APK Generators</h2><ul id="5bfc0eb7-3712-4e2e-a6fe-eda95502ed74" class="bulleted-list"><li><a href="https://github.com/googlechromelabs/llama-pack">Llama Pack</a> (by Google Chrome team)</li></ul><ul id="65395d9e-1fd9-4fb8-a297-430c7afcc03f" class="bulleted-list"><li><a href="https://www.pwabuilder.com/">PWA Builder</a> (by Microsoft)</li></ul><ul id="af489017-6477-44ac-b2b2-491f47732a39" class="bulleted-list"><li><a href="https://appmaker.xyz/pwa-to-apk/">PWA2APK</a></li></ul><hr id="42b2d9c9-a191-49c4-9f6c-9a6553058190"><h1 id="Web-Perception-API" class="">Web Perception API</h1><ul id="06b98000-3443-4bb3-843d-35a558c80059" class="bulleted-list"><li><a href="https://perceptiontoolkit.dev/getting-started/">Example and getting started guide</a></li></ul><hr id="17537f13-65d7-456d-b51b-4065a570d808"><h1 id="Troubleshooting" class="">Troubleshooting</h1><h2 id="UI-Fixes" class="">UI Fixes</h2><h3 id="Scroll-into-view-when-keyboard-is-shown-on-mobile" class="">Scroll into view when keyboard is shown on mobile</h3><p id="06a98906-c953-4aad-89e7-2b332ae634bf" class=""><code>Element.scrollIntoView()</code></p><h2 id="Common-issues" class="">Common issues</h2><h3 id="Workbox-new-version" class="">Workbox new version</h3><ul id="013d9c41-f4f7-487c-b6b7-a4329decaf0e" class="bulleted-list"><li>When implementing the new version popup make sure that the tracked files have a revision string on the end of the request inside the cache by workbox.<p id="c01dde6b-799a-482c-acac-057b795463ab" class=""><code>/home.js?</code><code><strong>WB_REVISION</strong></code><code>=df42c4e7c6b43998e5ba</code></p></li></ul><h3 id="event.respondWith()" class="">event.respondWith()</h3><ul id="8db55c65-4153-4f0e-a6fe-13f3318e4ed3" class="bulleted-list"><li><code>resulted in a network error response: an object that was not a Response was passed to respondWith().</code><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="7ec456bc-50be-42df-875d-83604c7d57d9"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Make sure to inlclude self closing brackets for the function supplied to the <code>event.respondWith()</code> function</div></figure><pre id="9f8fd0a8-1698-40ac-8707-1d2c106aa144" class="code"><code>event.respondWith((async () =&gt; {
   ...
   return await caches.match(event.request) || await fetch(event.request);
   ...
   // else
   return await caches.match(OFFLINE_PAGE_URL) || await fetch(OFFLINE_PAGE_URL, { method: 'GET' });
 })());</code></pre></li></ul></div></article><script src="./pwa-wiki_files/htmlbars.min.js" defer=""></script><script src="./pwa-wiki_files/javascript.min.js" defer=""></script><script src="./pwa-wiki_files/css.min.js" defer=""></script><script type="module">import { showSnackBar } from './js/snackBar.js';
-			// import {  } from './js/util.js';
 			import { Workbox } from 'https://storage.googleapis.com/workbox-cdn/releases/4.0.0/workbox-window.prod.mjs';
 			var workBox;
 
@@ -863,17 +979,17 @@ font-family: 'Segoe UI', Segoe, Tahoma, Geneva, sans-serif;</code></pre><ul id="
 
 			if ('serviceWorker' in navigator) {
 				workBox = new Workbox('./service-worker.js', { scope: '/' });
-				workBox.addEventListener('controlling', () => {
-					window.location.reload();
-				});
 				workBox.addEventListener('waiting' , () => {
-					var updateServiceWorker = event => {
+					var updateServiceWorker = () => {
+						workBox.addEventListener('controlling', () => {
+							window.location.reload();
+						});
 						workBox.messageSW({ type: 'NEW_VERSION'});
 					};
+					
 					window.updateServiceWorker = updateServiceWorker;
-		
 					setTimeout(() => 
-						showSnackBar('A new version is available <span style="font-size:17px;margin-left:5px">👉</span><a href="#" onclick="updateServiceWorker();" class="snackbar-refresh-button">&#x21BB;</a>')
+						showSnackBar('A new version is available <span style="font-size:17px;margin-left:5px">👉</span><button title="Reload page" onclick="updateServiceWorker();" class="snackbar-refresh-button">&#x21BB;</button>')
 						, 0
 					);
 				});

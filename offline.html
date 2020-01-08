@@ -305,12 +305,17 @@
                     
                     // * Check for any html files inside each cache under item's name
                     for (const request of cachedResources) {
-                        if (request.url.match(`(index\.html)|\/$`)) {
+                        const { url } = request;
+                        
+                        if (url.match(`(index\.html)|\/$`)) {
                             // * return the cached page and exit
-                            return {
-                                url: request.url,
-                                title: request.url.match(/(\/\w+\-\w+)/g)[0]
-                            }
+                            var title = url === `${window.location.origin}/` ? 
+                                'Home' : 
+                                url.match(/(\/\w+\-\w+)/g) ? 
+                                url.match(/(\/\w+\-\w+)/g)[0] : 
+                                url;
+                                
+                            return { url, title };
                         }
                     }
 

@@ -22,7 +22,7 @@ import '@polymer/paper-item/paper-item-body';
 import '@polymer/paper-item/paper-icon-item';
 
 import { showSnackBar } from "../global/snackBar";
-import { sharePage } from "./webShare";
+import { sharePage } from "./webShare.notused";
 import { 
     isIos,
     isInStandaloneMode,

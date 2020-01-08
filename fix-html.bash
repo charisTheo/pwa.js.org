@@ -18,4 +18,4 @@ sed -i '' 's/PWA Wiki_files/pwa-wiki_files/g' $PWD/index-temp2.html
 
 mv $PWD/index-temp2.html $PWD/src/index.html
 
-rm $PWD/index-temp.html-E $PWD/index-temp.html $PWD/index-temp2.html
+rm $PWD/index-temp.html-E $PWD/index-temp.html

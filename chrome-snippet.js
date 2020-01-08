@@ -59,7 +59,10 @@ const injectStyles = () => {
             --heading-color: var(--color-light-80);
         }
       }
-  
+      
+      hr {
+        border-bottom: 1px solid rgba(170, 0, 255, 1);
+      }
       article {
         padding: 15px;
       }
@@ -73,21 +76,86 @@ const injectStyles = () => {
         margin: 0 auto;
         overflow: auto;
       }
+      #snackbar {
+        position: fixed;
+        z-index: 15;
+        transition: bottom 0.5s ease-out;
+        min-height: 23px;
+        bottom: -150px;
+        left: calc(50% - 170px);
+        width: 320px;
+        background-color: #444444;
+        color: #ffffff;
+        border-radius: 5px;
+        box-shadow: 0px 2px 10px rgba(0,0,0,0.3);
+        padding: 10px;
+        margin: 0;
+        font-weight: 300;
+        font-size: 14px;
+        text-align: center;
+      }
+      #snackbar.show {
+          bottom: 30px;
+      }
+      #snackbar .snackbar-refresh-button {
+          color: var(--google-blue-300); 
+          font-size: 17px;
+          margin: 0;
+          padding: 5px 9px;
+          text-decoration: none;
+          transition: all 0.35s ease-out;
+      }
+      #snackbar .snackbar-refresh-button:focus {
+          outline: none;
+          font-size: 20px;
+          color: var(--accent-color);
+          text-shadow: 0px 3px 2px rgba(0,0,0,0.7);
+      }
+      
+      .focus-outline:focus,
+      .focus-outline.yellow-outline:focus {
+          outline: 3px solid var(--yellow);
+      }
+      .focus-outline.accent-outline:focus {
+          outline: 3px solid var(--accent-color);
+      }
+      
+      @media (max-width: 320px) {
+          #snackbar {
+              left: calc(50% - 150px);
+              width: 280px;
+          }
+      }
+      @media (min-width: 410px) {
+          #snackbar {
+              left: calc(50% - 190px);
+              width: 360px;
+          }
+      }
+      @media (min-width: 767px) {
+          #snackbar {
+              width: 400px;
+              left: calc(50% - 195px);
+          }
+          #snackbar.show {
+              bottom: 120px;
+          }
+      }
       ::-webkit-scrollbar {
-       width: 5px;
-       height: 5px;
-       opacity: 0.35;
-       -webkit-transition: all 0.35s;
-       -moz-transition: all 0.35s;
-       -ms-transition: all 0.35s;
-       -o-transition: all 0.35s;
-       transition: all 0.35s;
+        width: 5px;
+        height: 5px;
+        opacity: 0.35;
+        -webkit-transition: all 0.35s;
+        -moz-transition: all 0.35s;
+        -ms-transition: all 0.35s;
+        -o-transition: all 0.35s;
+        transition: all 0.35s;
       }
       *::-webkit-scrollbar-track {
-         background-color: #151515; 
+        background-color: #151515; 
       }
       *::-webkit-scrollbar-thumb {
-         background: #aa00ff;
+        background: #aa00ff;
       }
       /* HighlightJS Dracula styles */
       .hljs{display:block;overflow-x:auto;padding:.5em;background:#282a36}.hljs-keyword,.hljs-link,.hljs-literal,.hljs-section,.hljs-selector-tag{color:#8be9fd}.hljs-function .hljs-keyword{color:#ff79c6}.hljs,.hljs-subst{color:#f8f8f2}.hljs-addition,.hljs-attribute,.hljs-bullet,.hljs-name,.hljs-string,.hljs-symbol,.hljs-template-tag,.hljs-template-variable,.hljs-title,.hljs-type,.hljs-variable{color:#f1fa8c}.hljs-comment,.hljs-deletion,.hljs-meta,.hljs-quote{color:#6272a4}.hljs-doctag,.hljs-keyword,.hljs-literal,.hljs-name,.hljs-section,.hljs-selector-tag,.hljs-strong,.hljs-title,.hljs-type{font-weight:700}.hljs-emphasis{font-style:italic}
@@ -137,7 +205,6 @@ const injectScripts = () => {
   const serviceWorkerScript = document.createElement("script");
   serviceWorkerScript.type = "module";
   serviceWorkerScript.text = `import { showSnackBar } from './js/snackBar.js';
-              // import {  } from './js/util.js';
               import { Workbox } from 'https://storage.googleapis.com/workbox-cdn/releases/4.0.0/workbox-window.prod.mjs';
               var workBox;
   
@@ -145,17 +212,17 @@ const injectScripts = () => {
   
               if ('serviceWorker' in navigator) {
                   workBox = new Workbox('./service-worker.js', { scope: '/' });
-                  workBox.addEventListener('controlling', () => {
-                      window.location.reload();
-                  });
                   workBox.addEventListener('waiting' , () => {
                       var updateServiceWorker = event => {
-                          workBox.messageSW({ type: 'NEW_VERSION'});
+                        workBox.addEventListener('controlling', () => {
+                            window.location.reload();
+                        });
+                        workBox.messageSW({ type: 'NEW_VERSION'});
                       };
+
                       window.updateServiceWorker = updateServiceWorker;
-          
                       setTimeout(() => 
-                          showSnackBar('A new version is available <span style="font-size:17px;margin-left:5px">👉</span><a href="#" onclick="updateServiceWorker();" class="snackbar-refresh-button">&#x21BB;</a>')
+                          showSnackBar('A new version is available <span style="font-size:17px;margin-left:5px">👉</span><button title="Reload page" onclick="updateServiceWorker();" class="snackbar-refresh-button">&#x21BB;</button>')
                           , 0
                       );
                   });

@@ -1,10 +1,8 @@
 // https://developers.google.com/web/tools/workbox/guides/configure-workbox
-importScripts('https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js');
 
 // ? Both images are precached in the __precacheManifest file
 const OFFLINE_PAGE_URL = '/offline.html';
 const PLACEHOLDER_IMAGE_URL = '/img/placeholder-image.png';
-const PAGE_ICON_URL = '/favicon/android-chrome-192x192.png';
 
 if (workbox) {
   console.log(`Yay! Workbox is loaded 🎉`);
@@ -13,12 +11,14 @@ if (workbox) {
 }
 
 addEventListener('activate', event => {
-  event.waitUntil(clients.claim());
+  clients.claim();
 });
 
 addEventListener('message', event => {
   if (event.data && event.data.type === 'NEW_VERSION') {
+    console.log('calling skipWaiting...', skipWaiting);
     skipWaiting();
+    // console.log('workbox.skipWaiting', workbox.skipWaiting);
   }
 });
 
@@ -47,8 +47,7 @@ addEventListener('fetch', async event => {
     }
 });
 
-self.__precacheManifest = (self.__precacheManifest || []).concat([PLACEHOLDER_IMAGE_URL, PAGE_ICON_URL, OFFLINE_PAGE_URL]);
-workbox.precaching.precacheAndRoute(self.__precacheManifest);
+workbox.precaching.precacheAndRoute(self.__precacheManifest || [PLACEHOLDER_IMAGE_URL, OFFLINE_PAGE_URL]);
 
 workbox.routing.registerRoute(
   /(https:\/\/fonts\.(googleapis|gstatic)\.com)/,

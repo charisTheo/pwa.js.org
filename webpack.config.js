@@ -36,8 +36,7 @@ const plugins = [
   ]),
   new InjectManifest({
     swSrc: 'src/service-worker.js',
-    exclude: [/service-worker\.js/, /\.DS_Store$/, /CNAME/],
-    include: ['\/.js$']
+    exclude: [/\.DS_Store$/, /CNAME/]
   })
 ];
 

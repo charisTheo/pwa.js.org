@@ -1,4 +1,4 @@
-importScripts("precache-manifest.674ff84f05f65124ccf4af34cdb862ee.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("precache-manifest.9d49496c3bbd3a7be83e8ae31177648c.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 // https://developers.google.com/web/tools/workbox/guides/configure-workbox
 
@@ -18,9 +18,8 @@ addEventListener('activate', event => {
 
 addEventListener('message', event => {
   if (event.data && event.data.type === 'NEW_VERSION') {
-    console.log('calling skipWaiting...', skipWaiting);
+    // console.log('calling skipWaiting...', skipWaiting);
     skipWaiting();
-    // console.log('workbox.skipWaiting', workbox.skipWaiting);
   }
 });
 

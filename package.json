@@ -19,6 +19,7 @@
     "babel-polyfill": "^6.26.0",
     "date-fns": "^2.8.1",
     "install": "^0.13.0",
+    "mwc-pwa-reload": "^1.0.0",
     "npm": "^6.13.1",
     "puppeteer": "^2.0.0",
     "webpack": "^4.41.2",

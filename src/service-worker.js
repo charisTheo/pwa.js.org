@@ -16,9 +16,8 @@ addEventListener('activate', event => {
 
 addEventListener('message', event => {
   if (event.data && event.data.type === 'NEW_VERSION') {
-    console.log('calling skipWaiting...', skipWaiting);
+    // console.log('calling skipWaiting...', skipWaiting);
     skipWaiting();
-    // console.log('workbox.skipWaiting', workbox.skipWaiting);
   }
 });
 

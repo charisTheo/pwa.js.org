@@ -1,6 +1,7 @@
 {
   "short_name": "PWA Wiki",
   "name": "PWA.js.org Wiki",
+  "description": "Wiki for building and troubleshooting Progressive Web Apps. Example code for simple and advanced implementations of common PWA features and resources to assist you develop your PWA.",
   "icons": [
     {
       "src": "./favicon/favicon-16x16.png",

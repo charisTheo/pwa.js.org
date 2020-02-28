@@ -31,6 +31,7 @@ const plugins = [
       to: path.resolve(__dirname, 'build/favicon'),
     },
     'src/offline.html',
+    'src/img/placeholder-image.png',
     'src/manifest.json',
     'src/CNAME'
   ]),

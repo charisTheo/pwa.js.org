@@ -1,6 +1,6 @@
 // https://developers.google.com/web/tools/workbox/guides/configure-workbox
 
-// ? Both images are precached in the __precacheManifest file
+// ? Both files are precached in the __precacheManifest file
 const OFFLINE_PAGE_URL = '/offline.html';
 const PLACEHOLDER_IMAGE_URL = '/img/placeholder-image.png';
 
@@ -9,6 +9,8 @@ if (workbox) {
 } else {
   console.log(`Boo! Workbox didn't load 😬`);
 }
+
+workbox.precaching.precacheAndRoute(self.__precacheManifest);
 
 addEventListener('activate', event => {
   clients.claim();
@@ -46,11 +48,15 @@ addEventListener('fetch', async event => {
     }
 });
 
-workbox.precaching.precacheAndRoute(self.__precacheManifest || [PLACEHOLDER_IMAGE_URL, OFFLINE_PAGE_URL]);
-
 workbox.routing.registerRoute(
   /(https:\/\/fonts\.(googleapis|gstatic)\.com)/,
   new workbox.strategies.StaleWhileRevalidate()
+);
+workbox.routing.registerRoute(
+  /\.(?:woff|woff2|ttf|otf|eot)$/,
+  new workbox.strategies.StaleWhileRevalidate({
+    cacheName: 'fonts'
+  })
 );
 
 workbox.routing.registerRoute(

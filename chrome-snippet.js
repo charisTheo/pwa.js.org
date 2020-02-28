@@ -92,6 +92,15 @@ const injectStyles = () => {
       margin: 0 auto;
       overflow: auto;
     }
+    .copy-to-clipboard-button.heading-link-button {
+      background-color: transparent;
+      border: none;
+      margin-left: 22px;
+      padding: 15px 13px 12px;
+    }
+    .copy-to-clipboard-button.heading-link-button > svg {
+      fill: var(--accent-color);
+    }
     #snackbar {
       position: fixed;
       z-index: 15;
@@ -100,14 +109,14 @@ const injectStyles = () => {
       bottom: -150px;
       left: calc(50% - 170px);
       width: 320px;
-      background-color: #444444;
-      color: #ffffff;
+      background-color: #323232;
+      color: var(--accent-color);
       border-radius: 5px;
       box-shadow: 0px 2px 10px rgba(0,0,0,0.3);
       padding: 10px;
       margin: 0;
-      font-weight: 300;
-      font-size: 14px;
+      font-weight: 500;
+      font-size: 16px;
       text-align: center;
     }
     #snackbar.show {
@@ -211,11 +220,32 @@ const injectScripts = () => {
     document.body.append(script);
   });
 
-  const pwaReloadSnackbarScript = document.createElement("script");
-  pwaReloadSnackbarScript.src = 'https://unpkg.com/mwc-pwa-reload';
-  pwaReloadSnackbarScript.type = 'module';
-  pwaReloadSnackbarScript.defer = true;
-  document.body.append(pwaReloadSnackbarScript);
+  const appScript = document.createElement("script");
+  appScript.type = 'module';
+  appScript.text = `
+    import { showSnackBar, copyToClipboard } from './js/util.js';
+    import './js/mwc-pwa-reload.js';
+
+    const buttons = Array.from(document.querySelectorAll('.copy-to-clipboard-button.header-link-button'));
+    buttons.map(button => {
+      button.addEventListener('click', () => {
+        const origin = window.location.origin;
+        const headingHash = button.getAttribute('data-copy-to-clipboard');
+        copyToClipboard(origin + '/' + headingHash);
+      });
+    });
+  `;
+  document.body.append(appScript);
+
+  const gaTagManagerScript = document.createElement("script");
+  gaTagManagerScript.text = `
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-135267871-4');
+  `;
+  document.body.append(gaTagManagerScript);
 
   // dracula highlighting styles are inlined above
   const hljsScript = document.createElement("script");
@@ -243,8 +273,23 @@ const renameHeadingLinks = () => {
     const heading = document.getElementById(link.hash.split('#')[1]);
     const newId = heading.textContent.split(' ').join('-').trim();
     heading.id = newId;
+    heading.classList.add('page-heading');
+
     link.href = '#' + newId;
+
+    appendLinkIconOnHeading(heading, link.href);
   });
+};
+
+const appendLinkIconOnHeading = (heading, linkHref) => {
+  const button = document.createElement('button');
+  button.classList.add('copy-to-clipboard-button', 'heading-link-button');
+  const linkIconHTML = `<svg tabindex="-1" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" class="material-link-icon"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg>`;
+  button.innerHTML = linkIconHTML;
+  button.setAttribute('data-copy-to-clipboard', linkHref);
+  button.setAttribute('aria-label', `Copy ${heading.textContent} link to clipboard`);
+
+  heading.appendChild(button);
 };
 
 const makeNavigationAccessible = () => {

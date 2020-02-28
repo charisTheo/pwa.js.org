@@ -12,10 +12,13 @@ sed -E 's/http:\/\/localhost:([0-9]+)/./g' $PWD/index-temp.html >> $PWD/index-te
 # ? append document declaration in first line
 sed -i '' '1s/^/<!DOCTYPE <html>\'$'\n/' $PWD/index-temp2.html
 
-sed -i '' 's/.\/PWA%20Wiki.html//g' $PWD/index-temp2.html
-
 # ? Fix files urls
+sed -i '' 's/.\/PWA%20Wiki.html//g' $PWD/index-temp2.html
 sed -i '' 's/PWA Wiki_files/pwa-wiki_files/g' $PWD/index-temp2.html
+
+# ? Add import for GA script
+# * gTag initilisation is injected from the Chrome Snippet
+sed -i '' 's/<\/body>/<script async src="https:\/\/www.googletagmanager.com\/gtag\/js?id=UA-135267871-4"><\/script><\/body>/' $PWD/index-temp2.html
 
 # ? override files into workspace
 if [ -d ~/Desktop/pwa-wiki_files/ ]; then 

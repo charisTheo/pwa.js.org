@@ -16,7 +16,17 @@ const showSnackBar = message => {
     hideSnackBarTimeout = setTimeout(() => {
         snackBar.classList.remove('show');
         snackBar.innerHTML = '';
-    }, 5000);
+    }, 3000);
 }
 
-export { showSnackBar }
+const copyToClipboard = function(str) {
+    const el = document.createElement('textarea');
+    el.value = str;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+    showSnackBar('Link copied to clipboard!');
+}
+
+export { showSnackBar, copyToClipboard }

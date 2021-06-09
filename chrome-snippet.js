@@ -226,7 +226,7 @@ const injectScripts = () => {
     import { showSnackBar, copyToClipboard } from './js/util.js';
     import './js/mwc-pwa-reload.js';
 
-    const buttons = Array.from(document.querySelectorAll('.copy-to-clipboard-button.header-link-button'));
+    const buttons = Array.from(document.querySelectorAll('.copy-to-clipboard-button.heading-link-button'));
     buttons.map(button => {
       button.addEventListener('click', () => {
         const origin = window.location.origin;
@@ -273,7 +273,6 @@ const renameHeadingLinks = () => {
     const heading = document.getElementById(link.hash.split('#')[1]);
     const newId = heading.textContent.split(' ').join('-').trim();
     heading.id = newId;
-    heading.classList.add('page-heading');
 
     link.href = '#' + newId;
 
